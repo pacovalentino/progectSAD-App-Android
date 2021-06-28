@@ -3,14 +3,17 @@ package com.example.restdemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -24,6 +27,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import response.RegisterResponse;
@@ -39,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     Gson g = new Gson();
     private CheckBox c1,c2,c3,c4,c5;
     AlertDialog.Builder alertDialogBuilder;
+    DatePickerDialog picker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,27 @@ public class RegisterActivity extends AppCompatActivity {
         etNome=(EditText) findViewById(R.id.nameId);
         etCogn=(EditText) findViewById(R.id.cognId);
         etData=(EditText) findViewById(R.id.dateId);
+
+        etData.setInputType(InputType.TYPE_NULL);
+        etData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(RegisterActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                etData.setText(year  + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
+
         etCF=(EditText) findViewById(R.id.cfId);
         etCit=(EditText) findViewById(R.id.cityId);
         //etAddr=(EditText) findViewById(R.id.addrId);
