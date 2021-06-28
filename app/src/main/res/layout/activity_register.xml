@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    android:background="#293133"
+    tools:context=".LoginActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <View
+            android:id="@+id/divider9"
+            android:layout_width="20dp"
+            android:layout_height="730dp" />
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:srcCompat="@drawable/logo_app" />
+
+
+
+            <EditText
+                android:id="@+id/mailId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="EMAIL"
+                android:inputType="textEmailAddress"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <EditText
+                android:id="@+id/regpassId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="PASSWORD"
+                android:inputType="textPassword"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+
+            <View
+                android:id="@+id/divide"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <EditText
+                android:id="@+id/nameId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="FIRST NAME"
+                android:inputType="textPersonName"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+
+            <View
+                android:id="@+id/dividerxx5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <EditText
+                android:id="@+id/cognId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="LAST NAME"
+                android:inputType="textPersonName"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <EditText
+                android:id="@+id/dateId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="DATE: YY-MM-GG"
+                android:inputType="date"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+
+            <View
+                android:id="@+id/diviereder5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <RadioGroup
+                android:id="@+id/radiogroupId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/maleId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="Male"
+                    android:textColor="#9C9999" />
+
+                <RadioButton
+                    android:id="@+id/femaleId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Female"
+                    android:textColor="#9C9999" />
+            </RadioGroup>
+            <View
+                android:id="@+id/ididididid"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <EditText
+                android:id="@+id/cfId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="FISCAL CODE"
+                android:inputType="textPersonName"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+            <View
+                android:id="@+id/ididididi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <EditText
+                android:id="@+id/cityId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="CITY"
+                android:inputType="textPersonName"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+            <View
+                android:id="@+id/idididid"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+    <!--        <EditText
+                android:id="@+id/addrId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ADDRESS"
+                android:inputType="textPersonName"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999" />
+            <View
+                android:id="@+id/iididid"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+    -->
+            <EditText
+                android:id="@+id/capId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="CAP"
+                android:inputType="number"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999"/>
+            <View
+                android:id="@+id/iididi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <EditText
+                android:id="@+id/phoneId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="PHONE"
+                android:inputType="phone"
+                android:textColor="#F6F6F6"
+                android:textColorHint="#9C9999"/>
+            <View
+                android:id="@+id/iididiQWQWQW"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBox1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CARDIOPATHIC"
+                    android:textColor="#9C9999"/>
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="IMMUNODEPRESSION"
+                    android:textColor="#9C9999"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/iididiWQWQW"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ALLERGY"
+                    android:textColor="#9C9999"/>
+
+                <CheckBox
+                    android:id="@+id/checkBox4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ANTICOAGULANT"
+                    android:textColor="#9C9999"/>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/iididiQWQW"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+
+            <CheckBox
+                android:id="@+id/checkBox5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="COVID"
+                android:textColor="#9C9999" />
+
+            <View
+                android:id="@+id/fgfO"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+            <Button
+                android:id="@+id/buttonregisterid"
+                android:layout_width="365dp"
+                android:layout_height="70dp"
+                android:text="REGISTER"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                app:backgroundTint="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/hogiaaccountId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:text="Already have an account? Login"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <View
+                android:id="@+id/ULTIMO"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
