@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,23 +28,25 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.restdemo.R;
-import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import response.Patient;
-import response.RegisterResponse;
 import response.Structure;
 
 public class ReservationFragment extends Fragment implements NumberPicker.OnValueChangeListener {
 
     TextView t1,t2,t3,t4,testStrutt;
-    Button button,buttonStr,btReserve;
+    Button button,buttonStr,btReserve,btRegion;
     @SuppressLint("StaticFieldLeak")
-    static EditText editText,editTextStru;
-
+    static EditText editText,editTextStru,editRegion,editStructure;
     String URL="http://10.0.2.2:8000/api/reservation";
 
 
@@ -57,6 +60,8 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
         testStrutt=root.findViewById(R.id.textViewIdStruttura);
 
+        editStructure=root.findViewById(R.id.editStructure);
+        editRegion=root.findViewById(R.id.editRegion);
         t1=root.findViewById(R.id.t1);
         t1.setText(patient.getFirst_name()+" "+patient.getLast_name());
 
@@ -80,7 +85,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             @Override
             public void onClick(View v) {
 
-                if(editTextStru.getText().toString().equals("") || editText.getText().toString().equals("")){
+                if(editTextStru.getText().toString().equals("") || editText.getText().toString().equals("") || editRegion.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Controlla se ogni campo è completo", Toast.LENGTH_LONG).show();
                 } else{
                     StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -88,7 +93,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                         public void onResponse(String s) {
                             Log.e("Variabile reservation ", s);
                             if (s.equals("{\"reservation\":\"error\"}")) {
-                                Toast.makeText(getContext(), "Reservation exists\nEnter another date", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
                             } else if (s.equals("{\"reservation\":\"success\"}")) {
                                 Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
 
@@ -116,6 +121,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
              }
         });
         buttonStr=root.findViewById(R.id.buttonStructure);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,12 +130,22 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
             }
         });
+        btRegion=root.findViewById(R.id.buttonRegion);
+        btRegion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRegion();
+            }
+        });
         buttonStr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editRegion.getText().toString().equals("")){
+                    Toast.makeText(getContext(), "Compilare prima campo Region", Toast.LENGTH_LONG).show();
+                }else {
+                    show();
+                }
 
-
-                show();
             }
         });
 
@@ -176,36 +192,62 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
     }
 
+    public void show(){
 
-    public void show()
+        Editable urlComplete=editRegion.getText();
+
+        StringRequest request = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-structures-by-region/"+urlComplete, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String s) {
+                try {
+                    Log.e("Variabile structure ",s);
+                    JSONObject jsonObject=new JSONObject(s);
+                    JSONArray jsonArray =jsonObject.getJSONArray("structures");
+
+                    final String[] id_strutture = new String [jsonArray.length()];
+                    final String[] nome_strutture = new String [jsonArray.length()];
+                    for(int i=0;i<jsonArray.length();i++){
+                        nome_strutture[i]=jsonArray.getJSONObject(i).getString("name");
+                        id_strutture[i]=jsonArray.getJSONObject(i).getString("id");
+                        Log.e("Struttur1 debug",nome_strutture[i]+" "+id_strutture[i]);
+
+                    }
+                    show1(id_strutture,nome_strutture);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
+            }
+        });
+        RequestQueue rQueue = Volley.newRequestQueue(getContext());
+        rQueue.add(request);
+    }
+
+
+    public void show1(final String[] id_stru, final String[] struct)
     {
-        final Structure s1 = (Structure) getActivity().getIntent().getSerializableExtra("structure1");
-        final Structure s2 = (Structure) getActivity().getIntent().getSerializableExtra("structure2");
 
-        final String[] strut  = {s1.getNome(), s2.getNome()};
         final Dialog d = new Dialog(getContext());
         d.setTitle("NumberPicker");
         d.setContentView(R.layout.dialog);
         Button b1 = d.findViewById(R.id.button1);
         final Button b2 = d.findViewById(R.id.button2);
         final NumberPicker np = d.findViewById(R.id.numberPicker1);
-        np.setMaxValue(strut.length-1); // max value 100 //sono tre parole
+        np.setMaxValue(struct.length-1); // max value 100 //sono tre parole
         np.setMinValue(0);   // min value 0
-        np.setDisplayedValues(strut);
+        np.setDisplayedValues(struct);
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
         b1.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-
-                editTextStru.setText(strut[np.getValue()]); //set the value to textview
-                if(editTextStru.getText().toString().equals(s1.getNome())){
-                    testStrutt.setText(s1.getId());
-                } else if (editTextStru.getText().toString().equals(s2.getNome())){
-                    testStrutt.setText(s2.getId());
-                }
-
+                editStructure.setText(struct[np.getValue()]); //set the value to textview
+                testStrutt.setText(id_stru[np.getValue()]);
                 d.dismiss();
             }
         });
@@ -221,38 +263,41 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
     }
 
+    public void showRegion()
+    {
+        final String[] strut  = {
+                "Abruzzo", "Sicilia", "Piemonte", "Marche", "Valle d'Aosta", "Toscana", "Campania",
+                "Puglia", "Veneto", "Lombardia", "Emilia-Romagna", "Trentino-Alto Adige", "Sardegna", "Molise", "Calabria",
+                "Lazio", "Liguria", "Friuli-Venezia Giulia", "Basilicata", "Umbria"
+        };
+        final Dialog d = new Dialog(getContext());
+        d.setTitle("NumberPicker");
+        d.setContentView(R.layout.dialog);
+        Button b1 = d.findViewById(R.id.button1);
+        final Button b2 = d.findViewById(R.id.button2);
+        final NumberPicker np = d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(strut.length-1);
+        np.setMinValue(0);   // min value 0
+        np.setDisplayedValues(strut);
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(this);
+        b1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                editRegion.setText(strut[np.getValue()]); //set the value to textview
+                d.dismiss();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss(); // dismiss the dialog
+            }
+        });
+        d.show();
+    }
+
+
 }
-
-/*
-
-StringRequest request = new StringRequest(Request.Method.POST, "http://10.0.2.2:8000/api/data", new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    Log.e("Variabile data ", s);
-                    dataResponse = g.fromJson(s, DataResponse.class);
-                    if (dataResponse.getData().equals("busy")) {
-                        Toast.makeText(getContext(), "Data Occupata", Toast.LENGTH_LONG).show();
-                    } else if (dataResponse.getData().equals("free")) {
-
-                        Toast.makeText(getContext(), "Data Libera", Toast.LENGTH_LONG).show();
-
-
-                    } else
-                        Toast.makeText(getContext(), "Incorrect Details", Toast.LENGTH_LONG).show();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    Toast.makeText(getContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> parameters = new HashMap<>();
-                    return parameters;
-                }
-            };
-            RequestQueue rQueue = Volley.newRequestQueue(getContext());
-            rQueue.add(request);
-
-*/

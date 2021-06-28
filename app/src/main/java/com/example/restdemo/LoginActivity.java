@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView regText;
     ProgressDialog progressDialog;
     AlertDialog.Builder alertDialogBuilder;
-    Structure structure1,structure2;
 
 
     @Override
@@ -98,55 +97,18 @@ public class LoginActivity extends AppCompatActivity {
                                         try {
                                             Log.e("Variabile login ",s);
                                             JSONObject jsonObject=new JSONObject(s);
-                                            JSONArray jsonArrayAccount=jsonObject.getJSONArray("contenutiAccount");
-                                            JSONArray jsonArrayUser=jsonObject.getJSONArray("contenutiUser");
-                                            JSONArray jsonArrayPatient=jsonObject.getJSONArray("contenutiPatient");
-                                            JSONObject objAccount = jsonArrayAccount.getJSONObject(0);
-                                            JSONObject objPatient = jsonArrayPatient.getJSONObject(0);
-                                            JSONObject objUser =jsonArrayUser.getJSONObject(0);
-                                            final Patient patient=new Patient(objUser.getString("email"),null,objAccount.getString("first_name"),
-                                                                        objAccount.getString("last_name"),objAccount.getString("date_of_birth"),
-                                                                        objAccount.getString("gender"),objAccount.getString("fiscal_code"),
-                                                                        objAccount.getString("city"),objAccount.getString("cap"),
-                                                                        objAccount.getString("mobile_phone"),objPatient.getString("heart_disease"),
-                                                                        objPatient.getString("allergy"),objPatient.getString("immunosuppression"),
-                                                                        objPatient.getString("anticoagulants"),objPatient.getString("covid"),objUser.getString("id"));
+                                            final Patient patient=new Patient(jsonObject.getString("email"),null,jsonObject.getString("first_name"),
+                                                    jsonObject.getString("last_name"),jsonObject.getString("date_of_birth"),
+                                                    jsonObject.getString("gender"),jsonObject.getString("fiscal_code"),
+                                                    jsonObject.getString("city"),jsonObject.getString("cap"),
+                                                    jsonObject.getString("mobile_phone"),jsonObject.getString("heart_disease"),
+                                                    jsonObject.getString("allergy"),jsonObject.getString("immunosuppression"),
+                                                    jsonObject.getString("anticoagulants"),jsonObject.getString("covid"),jsonObject.getString("id"));
 
 
                                             //Per le strutture
-                                            StringRequest request = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/structure", new Response.Listener<String>(){
-                                                @Override
-                                                public void onResponse(String s) {
-                                                    try {
-                                                        Log.e("Variabile structure ",s);
-                                                        JSONObject jsonObject=new JSONObject(s);
-                                                        JSONArray jsonArray =jsonObject.getJSONArray("strutture");
-                                                        JSONObject obj1 = jsonArray.getJSONObject(0);
-                                                        JSONObject obj2 = jsonArray.getJSONObject(1);
-                                                        structure1=new Structure(obj1.getString("id"),obj1.getString("name"));
-                                                        structure2=new Structure(obj2.getString("id"),obj2.getString("name"));
-                                                        Log.e("Struttur1 debug",structure1.getId()+" "+structure1.getNome());
-                                                        //Log.e("Struttur2 debug",structure2.getId()+" "+structure2.getNome());
 
-
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            },new Response.ErrorListener(){
-                                                @Override
-                                                public void onErrorResponse(VolleyError volleyError) {
-                                                    Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                            RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
-                                            rQueue.add(request);
                                             //Log.e("Speriamo",vet[0]+" "+vet[1]);
-
-
-
-
-
 
                                             progressDialog = new ProgressDialog(LoginActivity.this, R.style.DialogTheme);
                                             progressDialog.setMessage("Loading..."); // Setting Message
@@ -160,8 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                                                         Thread.sleep(2800);
                                                         Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
                                                         form_intent.putExtra("patient",patient);
-                                                        form_intent.putExtra("structure1",structure1);
-                                                        form_intent.putExtra("structure2",structure2);
                                                         startActivity(form_intent);
                                                         finish();
                                                     } catch (Exception e) {
