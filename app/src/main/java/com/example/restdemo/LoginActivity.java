@@ -107,15 +107,26 @@ public class LoginActivity extends AppCompatActivity {
                                                     jsonObject.getString("allergy"), jsonObject.getString("immunosuppression"),
                                                     jsonObject.getString("anticoagulants"), jsonObject.getString("covid"), jsonObject.getString("id"));
 
-                                            StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/getreservationsbyemail", new Response.Listener<String>(){
+                                            StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/getreservationbyemail/"+jsonObject.getString("email"), new Response.Listener<String>(){
                                                 @Override
                                                 public void onResponse(String s) {
                                                     try {
                                                         Log.e("Reservation login ", s);
                                                         JSONObject jsonObject = new JSONObject(s);
+                                                        JSONArray jsonArray =jsonObject.getJSONArray("reservation");
+                                                        jsonObject=jsonArray.getJSONObject(0);
+                                                        final Reservation reservation = new Reservation(
+                                                                jsonObject.getString("structure_name"),
+                                                                jsonObject.getString("data"),
+                                                                jsonObject.getString("time"),
+                                                                jsonObject.getString("stock_id"),
+                                                                jsonObject.getString("name"),
+                                                                jsonObject.getString("state")
+                                                                );
 
-
-
+                                                        Log.e("Var reservation nome",reservation.getStruttura());
+                                                        //Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
+                                                        //form_intent.putExtra("get_reservation_by_mail",reservation);
 
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();

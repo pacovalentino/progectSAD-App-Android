@@ -23,7 +23,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        /*Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
+    /*    Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
         tV1=root.findViewById(R.id.t1);
         tV1.setText(reservation.getStruttura());
         tV2=root.findViewById(R.id.t2);
@@ -33,8 +33,8 @@ public class HomeFragment extends Fragment {
         tV4=root.findViewById(R.id.t4);
         tV4.setText(reservation.getStock_vaccino()+" "+reservation.getVaccino());
         tV5=root.findViewById(R.id.t5);
-        tV5.setText(reservation.getStato());*/
-
+        tV5.setText(reservation.getStato());
+*/
 
 
 
