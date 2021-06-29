@@ -41,6 +41,7 @@
                 android:layout_height="730dp" />
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="1300dp"
                 android:orientation="vertical">
@@ -50,7 +51,7 @@
                     android:layout_height="15dp" />
 
                 <TextView
-                    android:id="@+id/t9dsdssasasds"
+                    android:id="@+id/myreservationID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="My Reservation"
@@ -62,162 +63,191 @@
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
 
-                <TextView
-                    android:id="@+id/textV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Structure"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:id="@+id/idlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="390dp"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/textV"
+                        android:layout_width="354dp"
+                        android:layout_height="wrap_content"
+                        android:text="Structure"
+                        android:textSize="15dp" />
+
+                    <View
+                        android:id="@+id/didsvider"
+                        android:layout_width="350dp"
+                        android:layout_height="1dp"
+                        android:background="#293133" />
+
+                    <View
+                        android:id="@+id/divi11der"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/t1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parola"
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+                    <View
+                        android:id="@+id/divisdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/texdsdtV"
+                        android:layout_width="354dp"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textSize="15dp" />
+
+                    <View
+                        android:id="@+id/didsvsdider"
+                        android:layout_width="350dp"
+                        android:layout_height="1dp"
+                        android:background="#293133" />
+
+                    <View
+                        android:id="@+id/divisdsderxxx"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/t2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parola"
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+                    <View
+                        android:id="@+id/dsasivisdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/tasaexdsdtV"
+                        android:layout_width="354dp"
+                        android:layout_height="wrap_content"
+                        android:text="Time"
+                        android:textSize="15dp" />
+
+                    <View
+                        android:id="@+id/didsassvsdider"
+                        android:layout_width="350dp"
+                        android:layout_height="1dp"
+                        android:background="#293133" />
+
+                    <View
+                        android:id="@+id/divisdsdevvvvr"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/t3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parola"
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+                    <View
+                        android:id="@+id/divvvvisdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/tevvvxdsdtV"
+                        android:layout_width="354dp"
+                        android:layout_height="wrap_content"
+                        android:text="Lotto - Vaccine"
+                        android:textSize="15dp" />
+
+                    <View
+                        android:id="@+id/divvvdsvsdider"
+                        android:layout_width="350dp"
+                        android:layout_height="1dp"
+                        android:background="#293133" />
+
+                    <View
+                        android:id="@+id/dividsdssdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/t4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parola"
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+                    <View
+                        android:id="@+id/divisdsdvvver"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/texdsdvvvtV"
+                        android:layout_width="354dp"
+                        android:layout_height="wrap_content"
+                        android:text="State"
+                        android:textSize="15dp" />
+
+                    <View
+                        android:id="@+id/didsvsvvdider"
+                        android:layout_width="350dp"
+                        android:layout_height="1dp"
+                        android:background="#293133" />
+
+                    <View
+                        android:id="@+id/divisdsderaaa"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/t5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parola"
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+
+
+                    <View
+                        android:id="@+id/ULTIMO"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+                </LinearLayout>
                 <View
-                    android:id="@+id/didsvider"
+                    android:id="@+id/didsvsdsdsvvdider"
                     android:layout_width="350dp"
                     android:layout_height="1dp"
                     android:background="#293133" />
-
                 <View
-                    android:id="@+id/divi11der"
+                    android:id="@+id/divghc"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="15dp" />
 
                 <TextView
-                    android:id="@+id/t1"
+                    android:id="@+id/rrttrrttr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Parola"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:text="Info"
+                    android:textColor="#673AB7"
+                    android:textSize="30dp" />
 
                 <View
-                    android:id="@+id/divisdsder"
+                    android:id="@+id/kjkjkj"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/texdsdtV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/didsvsdider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divisdsderxxx"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Parola"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <View
-                    android:id="@+id/dsasivisdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/tasaexdsdtV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/didsassvsdider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divisdsdevvvvr"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Parola"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <View
-                    android:id="@+id/divvvvisdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/tevvvxdsdtV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Stock - Vaccine"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/divvvdsvsdider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/dividsdssdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Parola"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <View
-                    android:id="@+id/divisdsdvvver"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/texdsdvvvtV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="State"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/didsvsvvdider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divisdsderaaa"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Parola"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-
-
-                <View
-                    android:id="@+id/ULTIMO"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                    android:layout_height="15dp" />
 
             </LinearLayout>
 

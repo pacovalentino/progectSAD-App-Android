@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import response.Patient;
+import response.Reservation;
 import response.Structure;
 
 public class ReservationFragment extends Fragment implements NumberPicker.OnValueChangeListener {
@@ -81,6 +83,16 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         editTextStru=root.findViewById(R.id.editStructure);
         button=root.findViewById(R.id.buttonData);
         btReserve=root.findViewById(R.id.buttonReserve);
+
+        String a = (String) getActivity().getIntent().getSerializableExtra("var");
+        if(a.equals("addio")) {
+
+            btReserve.setEnabled(false);
+
+        } else if(a.equals("ciao")){
+            btReserve.setEnabled(false);
+        }
+
         btReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +100,9 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                 if(editTextStru.getText().toString().equals("") || editText.getText().toString().equals("") || editRegion.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Controlla se ogni campo è completo", Toast.LENGTH_LONG).show();
                 } else{
+
+
+
                     StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String s) {
@@ -121,6 +136,8 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
              }
         });
         buttonStr=root.findViewById(R.id.buttonStructure);
+
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

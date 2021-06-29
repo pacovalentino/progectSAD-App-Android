@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.passId);
         regText=findViewById(R.id.notaccountId);
 
+        final Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
+
         regText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,22 +113,34 @@ public class LoginActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onResponse(String s) {
                                                     try {
-                                                        Log.e("Reservation login ", s);
-                                                        JSONObject jsonObject = new JSONObject(s);
-                                                        JSONArray jsonArray =jsonObject.getJSONArray("reservation");
-                                                        jsonObject=jsonArray.getJSONObject(0);
-                                                        final Reservation reservation = new Reservation(
-                                                                jsonObject.getString("structure_name"),
-                                                                jsonObject.getString("data"),
-                                                                jsonObject.getString("time"),
-                                                                jsonObject.getString("stock_id"),
-                                                                jsonObject.getString("name"),
-                                                                jsonObject.getString("state")
-                                                                );
+                                                        Log.e("login response:", s);
 
-                                                        Log.e("Var reservation nome",reservation.getStruttura());
-                                                        //Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
-                                                        //form_intent.putExtra("get_reservation_by_mail",reservation);
+
+                                                        String variabile="ciao";
+                                                        JSONObject jsonObject = new JSONObject(s);
+                                                        //Log.e("var null",);
+                                                        if (jsonObject.isNull("reservation")) {
+                                                            Log.e("var null","sono dentro");
+                                                            form_intent.putExtra("var", variabile);
+                                                        }else {
+                                                            Log.e("json object:", jsonObject.toString());
+                                                            JSONObject jsonObject2 = jsonObject.getJSONObject("reservation");
+                                                            Log.e("json object2:", jsonObject2.toString());
+
+                                                            final Reservation reservation = new Reservation(
+                                                                    jsonObject2.getString("structure_name"),
+                                                                    jsonObject2.getString("date"),
+                                                                    jsonObject2.getString("time"),
+                                                                    jsonObject2.getString("batch_id"),
+                                                                    jsonObject2.getString("name"),
+                                                                    jsonObject2.getString("state")
+                                                            );
+                                                            Log.e("reservation stru:", reservation.getStruttura());
+
+                                                            form_intent.putExtra("get_reservation_by_mail", reservation);
+                                                            variabile="addio";
+                                                            form_intent.putExtra("var",variabile);
+                                                        }
 
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
@@ -153,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 public void run() {
                                                     try {
                                                         Thread.sleep(2800);
-                                                        Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
+                                                        //Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
                                                         form_intent.putExtra("patient",patient);
                                                         startActivity(form_intent);
                                                         finish();
@@ -248,36 +262,3 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.show();
     }
 }
-
-/*
-StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/getreservationsbyemail", new Response.Listener<String>() {
-                                                @Override
-                                                public void onResponse(String s) {
-                                                    try {
-                                                        Log.e("Reservation with mail", s);
-                                                        JSONObject jsonObject = new JSONObject(s);
-                                                        final Reservation reservation = new Reservation(
-                                                                jsonObject.getString("structure_name"),
-                                                                jsonObject.getString("date"),
-                                                                jsonObject.getString("time"),
-                                                                jsonObject.getString("stock_id"),
-                                                                jsonObject.getString("name"),
-                                                                jsonObject.getString("state"));
-
-                                                        Intent form_intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                                        form_intent.putExtra("get_reservation", reservation);
-
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }, new Response.ErrorListener() {
-                                                @Override
-                                                public void onErrorResponse(VolleyError volleyError) {
-                                                    Toast.makeText(getApplicationContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-
-                                            RequestQueue rQueue1 = Volley.newRequestQueue(getApplicationContext());
-                                            rQueue1.add(request1);
-* */
