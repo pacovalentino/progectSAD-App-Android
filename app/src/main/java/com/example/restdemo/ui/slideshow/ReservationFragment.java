@@ -64,6 +64,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         View root = inflater.inflate(R.layout.fragment_reservation, container, false);
 
         final Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
+        final Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
 
         testStrutt=root.findViewById(R.id.textViewIdStruttura);
 
@@ -116,7 +117,29 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                                 Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
                             } else if (s.equals("{\"reservation\":\"success\"}")) {
                                 Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
-                                
+
+                               /* progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
+                                progressDialog.setMessage("Loading..."); // Setting Message
+                                //progressDialog.setTitle("ProgressDialog"); // Setting Title
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                                progressDialog.show(); // Display Progress Dialog
+                                progressDialog.setCancelable(false);
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        try {
+                                            Thread.sleep(2800);
+                                            Intent form_intent = new Intent(getContext(),HomeActivity.class);
+                                            form_intent.putExtra("get_reservation_by_mail",reservation);
+                                            startActivity(form_intent);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        progressDialog.dismiss();
+                                    }
+                                }).start();*/
+
+
+
 
                             } else
                                 Toast.makeText(getContext(), "Incorrect Details", Toast.LENGTH_LONG).show();

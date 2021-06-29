@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-/*
+
         tV1 = root.findViewById(R.id.t1);
         textView=root.findViewById(R.id.myreservationID);
         tV2 = root.findViewById(R.id.t2);
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
 
 
 
-*/
+
 
         return root;
     }
