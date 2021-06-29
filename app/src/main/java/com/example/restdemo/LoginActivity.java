@@ -31,11 +31,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import response.LoginResponse;
 import response.Patient;
+import response.Reservation;
 import response.Structure;
 
 public class LoginActivity extends AppCompatActivity {
@@ -95,20 +97,40 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(String s) {
                                         try {
-                                            Log.e("Variabile login ",s);
-                                            JSONObject jsonObject=new JSONObject(s);
-                                            final Patient patient=new Patient(jsonObject.getString("email"),null,jsonObject.getString("first_name"),
-                                                    jsonObject.getString("last_name"),jsonObject.getString("date_of_birth"),
-                                                    jsonObject.getString("gender"),jsonObject.getString("fiscal_code"),
-                                                    jsonObject.getString("city"),jsonObject.getString("cap"),
-                                                    jsonObject.getString("mobile_phone"),jsonObject.getString("heart_disease"),
-                                                    jsonObject.getString("allergy"),jsonObject.getString("immunosuppression"),
-                                                    jsonObject.getString("anticoagulants"),jsonObject.getString("covid"),jsonObject.getString("id"));
+                                            Log.e("Variabile login ", s);
+                                            JSONObject jsonObject = new JSONObject(s);
+                                            final Patient patient = new Patient(jsonObject.getString("email"), null, jsonObject.getString("first_name"),
+                                                    jsonObject.getString("last_name"), jsonObject.getString("date_of_birth"),
+                                                    jsonObject.getString("gender"), jsonObject.getString("fiscal_code"),
+                                                    jsonObject.getString("city"), jsonObject.getString("cap"),
+                                                    jsonObject.getString("mobile_phone"), jsonObject.getString("heart_disease"),
+                                                    jsonObject.getString("allergy"), jsonObject.getString("immunosuppression"),
+                                                    jsonObject.getString("anticoagulants"), jsonObject.getString("covid"), jsonObject.getString("id"));
+
+                                            StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/getreservationsbyemail", new Response.Listener<String>(){
+                                                @Override
+                                                public void onResponse(String s) {
+                                                    try {
+                                                        Log.e("Reservation login ", s);
+                                                        JSONObject jsonObject = new JSONObject(s);
 
 
-                                            //Per le strutture
 
-                                            //Log.e("Speriamo",vet[0]+" "+vet[1]);
+
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            },new Response.ErrorListener(){
+                                                @Override
+                                                public void onErrorResponse(VolleyError volleyError) {
+                                                    Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                            RequestQueue rQueue1 = Volley.newRequestQueue(getApplicationContext());
+                                            rQueue1.add(request1);
+
+
 
                                             progressDialog = new ProgressDialog(LoginActivity.this, R.style.DialogTheme);
                                             progressDialog.setMessage("Loading..."); // Setting Message
@@ -182,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 }
 
+
     @Override
     public void onBackPressed() {
         //Toast.makeText(getApplicationContext(), "Gestione chiusura app\nDa implementare", Toast.LENGTH_LONG).show();
@@ -214,3 +237,36 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.show();
     }
 }
+
+/*
+StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/getreservationsbyemail", new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String s) {
+                                                    try {
+                                                        Log.e("Reservation with mail", s);
+                                                        JSONObject jsonObject = new JSONObject(s);
+                                                        final Reservation reservation = new Reservation(
+                                                                jsonObject.getString("structure_name"),
+                                                                jsonObject.getString("date"),
+                                                                jsonObject.getString("time"),
+                                                                jsonObject.getString("stock_id"),
+                                                                jsonObject.getString("name"),
+                                                                jsonObject.getString("state"));
+
+                                                        Intent form_intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                        form_intent.putExtra("get_reservation", reservation);
+
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }, new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError volleyError) {
+                                                    Toast.makeText(getApplicationContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+
+                                            RequestQueue rQueue1 = Volley.newRequestQueue(getApplicationContext());
+                                            rQueue1.add(request1);
+* */

@@ -18,7 +18,7 @@
         android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="EMAIL"
-        android:text="demian.fontana+194@example.com"
+        android:text="maria.benedetti+222@example.com"
         android:inputType="textEmailAddress"
         android:textColor="#FAF5F5"
         android:textColorHint="#9C9999"
