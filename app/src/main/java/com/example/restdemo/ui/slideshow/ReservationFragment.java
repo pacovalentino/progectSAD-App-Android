@@ -118,7 +118,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                             } else if (s.equals("{\"reservation\":\"success\"}")) {
                                 Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
 
-                               /* progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
+                                progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
                                 progressDialog.setMessage("Loading..."); // Setting Message
                                 //progressDialog.setTitle("ProgressDialog"); // Setting Title
                                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
@@ -128,15 +128,17 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                                     public void run() {
                                         try {
                                             Thread.sleep(2800);
-                                            Intent form_intent = new Intent(getContext(),HomeActivity.class);
-                                            form_intent.putExtra("get_reservation_by_mail",reservation);
-                                            startActivity(form_intent);
+                                            Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
+                                            //Intent form_intent = new Intent(getContext(),HomeActivity.class);
+                                            //form_intent.putExtra("get_reservation_by_mail",reservation);
+
+                                            //startActivity(form_intent);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                         progressDialog.dismiss();
                                     }
-                                }).start();*/
+                                }).start();
 
 
 
