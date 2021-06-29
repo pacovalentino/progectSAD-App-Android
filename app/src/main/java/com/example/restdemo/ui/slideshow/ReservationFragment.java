@@ -4,6 +4,8 @@ package com.example.restdemo.ui.slideshow;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,6 +30,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.restdemo.HomeActivity;
+import com.example.restdemo.LoginActivity;
 import com.example.restdemo.R;
 
 import org.json.JSONArray;
@@ -50,6 +54,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     @SuppressLint("StaticFieldLeak")
     static EditText editText,editTextStru,editRegion,editStructure;
     String URL="http://10.0.2.2:8000/api/reservation";
+    ProgressDialog progressDialog;
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -90,7 +95,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             btReserve.setEnabled(false);
 
         } else if(a.equals("ciao")){
-            btReserve.setEnabled(false);
+            btReserve.setEnabled(true);
         }
 
         btReserve.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +116,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                                 Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
                             } else if (s.equals("{\"reservation\":\"success\"}")) {
                                 Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
+
 
                             } else
                                 Toast.makeText(getContext(), "Incorrect Details", Toast.LENGTH_LONG).show();
