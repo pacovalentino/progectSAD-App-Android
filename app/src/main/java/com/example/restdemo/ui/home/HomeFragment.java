@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+/*
         tV1 = root.findViewById(R.id.t1);
         textView=root.findViewById(R.id.myreservationID);
         tV2 = root.findViewById(R.id.t2);
@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
         linearLayout=root.findViewById(R.id.idlayout);
 
         String a = (String) getActivity().getIntent().getSerializableExtra("var");
+
+        Log.e("variabile a",a);
         if(a.equals("addio")) {
 
             Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
@@ -58,7 +60,7 @@ public class HomeFragment extends Fragment {
 
 
 
-
+*/
 
         return root;
     }

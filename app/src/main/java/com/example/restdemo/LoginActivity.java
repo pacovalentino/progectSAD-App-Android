@@ -109,15 +109,16 @@ public class LoginActivity extends AppCompatActivity {
                                                     jsonObject.getString("allergy"), jsonObject.getString("immunosuppression"),
                                                     jsonObject.getString("anticoagulants"), jsonObject.getString("covid"), jsonObject.getString("id"));
 
-                                            StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/getreservationbyemail/"+jsonObject.getString("email"), new Response.Listener<String>(){
+                                            Log.e("login response:", jsonObject.getString("email"));
+                                            StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-reservations-by-email/"+jsonObject.getString("email"), new Response.Listener<String>(){
                                                 @Override
                                                 public void onResponse(String s) {
                                                     try {
                                                         Log.e("login response:", s);
 
-
                                                         String variabile="ciao";
                                                         JSONObject jsonObject = new JSONObject(s);
+                                                        Log.e("var null",variabile);
                                                         //Log.e("var null",);
                                                         if (jsonObject.isNull("reservation")) {
                                                             Log.e("var null","sono dentro");
