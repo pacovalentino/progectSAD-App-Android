@@ -1,5 +1,7 @@
 package com.example.restdemo.ui.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +72,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Bottone Email", Toast.LENGTH_LONG).show();
                 //Codice
+                Intent email= new Intent(Intent.ACTION_SENDTO);
+                email.setData(Uri.parse("mailto:your.eamil@gmail.com"));
+                email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                email.putExtra(Intent.EXTRA_TEXT, "My Email message");
+                startActivity(email);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +84,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Bottone Call", Toast.LENGTH_LONG).show();
                 //Codice
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:0123456789"));
+                startActivity(intent);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +94,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Bottone Web", Toast.LENGTH_LONG).show();
                 //Codice
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                startActivity(browserIntent);
             }
         });
 
@@ -93,6 +105,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Bottone Facebook", Toast.LENGTH_LONG).show();
                 //Codice
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
+                startActivity(browserIntent);
             }
         });
 
