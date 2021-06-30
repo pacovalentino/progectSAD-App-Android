@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +22,7 @@ public class HomeFragment extends Fragment {
 
     TextView tV1, tV2,tV3,tV4,tV5,textView;
     LinearLayout linearLayout;
+    Button b1,b2,b3,b4;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +36,10 @@ public class HomeFragment extends Fragment {
         tV3 = root.findViewById(R.id.t3);
         tV4 = root.findViewById(R.id.t4);
         tV5 = root.findViewById(R.id.t5);
+        b1=root.findViewById(R.id.bEmail);
+        b2=root.findViewById(R.id.bCall);
+        b3=root.findViewById(R.id.bWeb);
+        b4=root.findViewById(R.id.bFacebook);
         linearLayout=root.findViewById(R.id.idlayout);
 
         String a = (String) getActivity().getIntent().getSerializableExtra("var");
@@ -57,6 +64,37 @@ public class HomeFragment extends Fragment {
             linearLayout.setLayoutParams(params);
             linearLayout.setVisibility(View.INVISIBLE);
         }
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Bottone Email", Toast.LENGTH_LONG).show();
+                //Codice
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Bottone Call", Toast.LENGTH_LONG).show();
+                //Codice
+            }
+        });
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Bottone Web", Toast.LENGTH_LONG).show();
+                //Codice
+            }
+        });
+
+
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Bottone Facebook", Toast.LENGTH_LONG).show();
+                //Codice
+            }
+        });
 
 
 

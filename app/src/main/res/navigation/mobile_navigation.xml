@@ -23,9 +23,4 @@
         android:label="Reservation"
         tools:layout="@layout/fragment_reservation" />
 
-    <fragment
-        android:id="@+id/nav_reservation_fine"
-        android:name="com.example.restdemo.ui.slideshow.ReservationFineFragment"
-        android:label="ReservationFine"
-        tools:layout="@layout/fragment_reservation_fine" />
 </navigation>
