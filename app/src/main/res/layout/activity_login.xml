@@ -18,7 +18,6 @@
         android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="EMAIL"
-        android:text="felicia.negri+338@example.net"
         android:inputType="textEmailAddress"
         android:textColor="#FAF5F5"
         android:textColorHint="#9C9999"

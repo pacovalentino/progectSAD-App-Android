@@ -50,6 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
 
+
+
                 <TextView
                     android:id="@+id/t9dsdssasasds"
                     android:layout_width="match_parent"
@@ -63,143 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
 
-                <TextView
-                    android:id="@+id/qwqw"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="15dp" />
 
-                <View
-                    android:id="@+id/didsqwqwvider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/diqwqvi11der"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nome Completo"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <View
-                    android:id="@+id/dividvccver"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp" />
-
-                <TextView
-                    android:id="@+id/tasaexdsdtV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/didsassvsdider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divisdsdevvvvr"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-
-                <View
-                    android:id="@+id/divisdsdccvvver"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/texdsdvvccvtV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Fiscal Code"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/didsvsvvdiccder"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divisvvvvdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Last Name"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-
-                <View
-                    android:id="@+id/divi11der"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <View
-                    android:id="@+id/didsvider"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divvvvisdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-
-                <TextView
-                    android:id="@+id/texdsdvvvaatV"
-                    android:layout_width="354dp"
-                    android:layout_height="wrap_content"
-                    android:text="Phone"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/didsvsvvdideraa"
-                    android:layout_width="350dp"
-                    android:layout_height="1dp"
-                    android:background="#293133" />
-
-                <View
-                    android:id="@+id/divisdsderqwqwq"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/t4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Last Name"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <View
-                    android:id="@+id/divisdsdvvveraa"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
 
                 <TextView
                     android:id="@+id/tedfdfxtV"
@@ -359,6 +225,7 @@
                     android:id="@+id/diviqaqaasas"
                     android:layout_width="359dp"
                     android:layout_height="45dp" />
+
 
                 <Button
                     android:id="@+id/buttonReserve"

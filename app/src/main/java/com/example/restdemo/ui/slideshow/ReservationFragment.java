@@ -2,9 +2,11 @@ package com.example.restdemo.ui.slideshow;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import response.Patient;
 import response.Reservation;
@@ -49,12 +52,13 @@ import response.Structure;
 
 public class ReservationFragment extends Fragment implements NumberPicker.OnValueChangeListener {
 
-    TextView t1,t2,t3,t4,testStrutt;
+    TextView testStrutt;
     Button button,buttonStr,btReserve,btRegion;
     @SuppressLint("StaticFieldLeak")
-    static EditText editText,editTextStru,editRegion,editStructure;
+    static EditText editText,editRegion,editStructure;
     String URL="http://10.0.2.2:8000/api/reservation";
     ProgressDialog progressDialog;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -62,40 +66,38 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_reservation, container, false);
-
         final Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
-        final Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
-
         testStrutt=root.findViewById(R.id.textViewIdStruttura);
-
         editStructure=root.findViewById(R.id.editStructure);
         editRegion=root.findViewById(R.id.editRegion);
-        t1=root.findViewById(R.id.t1);
-        t1.setText(patient.getFirst_name()+" "+patient.getLast_name());
-
-        t2=root.findViewById(R.id.t2);
-        t2.setText(patient.getEmail());
-
-        t3=root.findViewById(R.id.t3);
-        t3.setText(patient.getFiscal_code());
-
-        t4=root.findViewById(R.id.t4);
-        t4.setText(patient.getMobile_phone());
+        buttonStr=root.findViewById(R.id.buttonStructure);
+        btRegion=root.findViewById(R.id.buttonRegion);
 
         //****************Codice
 
 
         editText=root.findViewById(R.id.editdata);
-        editTextStru=root.findViewById(R.id.editStructure);
         button=root.findViewById(R.id.buttonData);
         btReserve=root.findViewById(R.id.buttonReserve);
 
         String a = (String) getActivity().getIntent().getSerializableExtra("var");
         if(a.equals("addio")) {
+            //Se è presente la reservation
+            editText.setFocusable(false);
+            editText.setEnabled(false);
+            editRegion.setFocusable(false);
+            editRegion.setEnabled(false);
+            editStructure.setFocusable(false);
+            editStructure.setEnabled(false);
 
+
+            button.setEnabled(false);
+            buttonStr.setEnabled(false);
+            btRegion.setEnabled(false);
             btReserve.setEnabled(false);
 
         } else if(a.equals("ciao")){
+
             btReserve.setEnabled(true);
         }
 
@@ -103,7 +105,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             @Override
             public void onClick(View v) {
 
-                if(editTextStru.getText().toString().equals("") || editText.getText().toString().equals("") || editRegion.getText().toString().equals("")){
+                if(editStructure.getText().toString().equals("") || editText.getText().toString().equals("") || editRegion.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Controlla se ogni campo è completo", Toast.LENGTH_LONG).show();
                 } else{
 
@@ -116,30 +118,61 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                             if (s.equals("{\"reservation\":\"error\"}")) {
                                 Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
                             } else if (s.equals("{\"reservation\":\"success\"}")) {
-                                Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
 
-                                progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
-                                progressDialog.setMessage("Loading..."); // Setting Message
-                                //progressDialog.setTitle("ProgressDialog"); // Setting Title
-                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                                progressDialog.show(); // Display Progress Dialog
-                                progressDialog.setCancelable(false);
-                                new Thread(new Runnable() {
-                                    public void run() {
-                                        try {
-                                            Thread.sleep(2800);
-                                            Toast.makeText(getContext(), "Reservation Successful", Toast.LENGTH_LONG).show();
-                                            //Intent form_intent = new Intent(getContext(),HomeActivity.class);
-                                            //form_intent.putExtra("get_reservation_by_mail",reservation);
+                                Toast.makeText(getContext(), "Reservation Successful\nN.B. Per visualizzarla effettuare nuovamente l'accesso", Toast.LENGTH_LONG).show();
+                                btReserve.setEnabled(false);
+                                editText.setFocusable(false);
+                                editText.setEnabled(false);
+                                editRegion.setFocusable(false);
+                                editRegion.setEnabled(false);
+                                editStructure.setFocusable(false);
+                                editStructure.setEnabled(false);
+                                button.setEnabled(false);
+                                buttonStr.setEnabled(false);
+                                btRegion.setEnabled(false);
 
-                                            //startActivity(form_intent);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                        progressDialog.dismiss();
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext(), R.style.DialogThemeExit);
+                                alertDialogBuilder.setTitle("Confirm Reservation?").setMessage("Per confermare effettua nuovamente l'accesso");
+                                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
+                                        progressDialog.setMessage("Loading..."); // Setting Message
+                                        //progressDialog.setTitle("ProgressDialog"); // Setting Title
+                                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                                        progressDialog.show(); // Display Progress Dialog
+                                        progressDialog.setCancelable(false);
+                                        new Thread(new Runnable() {
+                                            public void run() {
+                                                try {
+                                                    Thread.sleep(1500);
+                                                    startActivity(new Intent(getContext(),LoginActivity.class));
+                                                    getActivity().finish();
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                progressDialog.dismiss();
+                                            }
+                                        }).start();
+
                                     }
-                                }).start();
+                                });
 
+                                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(getContext(),"You clicked over No",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                alertDialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(getContext(),"You clicked on Cancel",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
 
 
 
@@ -163,11 +196,12 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                     };
                     RequestQueue rQueue = Volley.newRequestQueue(getContext());
                     rQueue.add(request);
+
+
+
                 }
              }
         });
-        buttonStr=root.findViewById(R.id.buttonStructure);
-
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +212,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
             }
         });
-        btRegion=root.findViewById(R.id.buttonRegion);
+
         btRegion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
