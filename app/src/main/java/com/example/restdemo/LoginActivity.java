@@ -57,10 +57,28 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        String emailRESERV = (String) getIntent().getSerializableExtra("email_reserv");
+
+
+
         loginButton = findViewById(R.id.button);
         etMail = findViewById(R.id.emailId);
         etPassword = findViewById(R.id.passId);
         regText=findViewById(R.id.notaccountId);
+
+        if(emailRESERV!=null){
+            etMail.setText(emailRESERV);
+            etPassword.setText("test"); //la pass non me la passo quindi la metto a mano dato che è sempre uguale
+
+            //Autoclick
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loginButton.performClick();
+                }
+            }, 0);
+
+        }
 
         final Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
 

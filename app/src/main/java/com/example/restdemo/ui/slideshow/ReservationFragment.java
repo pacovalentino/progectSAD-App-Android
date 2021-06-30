@@ -23,6 +23,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,7 @@ import com.example.restdemo.HomeActivity;
 import com.example.restdemo.LoginActivity;
 import com.example.restdemo.R;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,21 +62,22 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     ProgressDialog progressDialog;
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_reservation, container, false);
+
         final Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
+
         testStrutt=root.findViewById(R.id.textViewIdStruttura);
         editStructure=root.findViewById(R.id.editStructure);
         editRegion=root.findViewById(R.id.editRegion);
         buttonStr=root.findViewById(R.id.buttonStructure);
         btRegion=root.findViewById(R.id.buttonRegion);
 
-        //****************Codice
 
+        //****************Codice
 
         editText=root.findViewById(R.id.editdata);
         button=root.findViewById(R.id.buttonData);
@@ -89,15 +92,12 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             editRegion.setEnabled(false);
             editStructure.setFocusable(false);
             editStructure.setEnabled(false);
-
-
             button.setEnabled(false);
             buttonStr.setEnabled(false);
             btRegion.setEnabled(false);
             btReserve.setEnabled(false);
 
         } else if(a.equals("ciao")){
-
             btReserve.setEnabled(true);
         }
 
@@ -119,60 +119,28 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                                 Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
                             } else if (s.equals("{\"reservation\":\"success\"}")) {
 
-                                Toast.makeText(getContext(), "Reservation Successful\nN.B. Per visualizzarla effettuare nuovamente l'accesso", Toast.LENGTH_LONG).show();
-                                btReserve.setEnabled(false);
-                                editText.setFocusable(false);
-                                editText.setEnabled(false);
-                                editRegion.setFocusable(false);
-                                editRegion.setEnabled(false);
-                                editStructure.setFocusable(false);
-                                editStructure.setEnabled(false);
-                                button.setEnabled(false);
-                                buttonStr.setEnabled(false);
-                                btRegion.setEnabled(false);
+                                final Intent form_intent = new Intent(getContext(),LoginActivity.class);
 
-                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext(), R.style.DialogThemeExit);
-                                alertDialogBuilder.setTitle("Confirm Reservation?").setMessage("Per confermare effettua nuovamente l'accesso");
-                                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface arg0, int arg1) {
-                                        progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
-                                        progressDialog.setMessage("Loading..."); // Setting Message
-                                        //progressDialog.setTitle("ProgressDialog"); // Setting Title
-                                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                                        progressDialog.show(); // Display Progress Dialog
-                                        progressDialog.setCancelable(false);
-                                        new Thread(new Runnable() {
-                                            public void run() {
-                                                try {
-                                                    Thread.sleep(1500);
-                                                    startActivity(new Intent(getContext(),LoginActivity.class));
-                                                    getActivity().finish();
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                                progressDialog.dismiss();
-                                            }
-                                        }).start();
 
+                                progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
+                                progressDialog.setMessage("Loading..."); // Setting Message
+                                //progressDialog.setTitle("ProgressDialog"); // Setting Title
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                                progressDialog.show(); // Display Progress Dialog
+                                progressDialog.setCancelable(false);
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        try {
+                                            Thread.sleep(1000);
+                                            form_intent.putExtra("email_reserv",patient.getEmail());
+                                            startActivity(form_intent);
+                                            getActivity().finish();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        progressDialog.dismiss();
                                     }
-                                });
-
-                                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(getContext(),"You clicked over No",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                alertDialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(getContext(),"You clicked on Cancel",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();
+                                }).start();
 
 
 
