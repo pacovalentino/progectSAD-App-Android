@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
 
     TextView tV1, tV2,tV3,tV4,tV5,textView;
     LinearLayout linearLayout,linearLayoutinfo;
-    Button b1,b2,b3,b4;
+    Button b1,b2,b3,b4,b5,b6,b7;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +42,9 @@ public class HomeFragment extends Fragment {
         b2=root.findViewById(R.id.bCall);
         b3=root.findViewById(R.id.bWeb);
         b4=root.findViewById(R.id.bFacebook);
+        b5=root.findViewById(R.id.bMap);
+        b6=root.findViewById(R.id.bCustomer);
+        b7=root.findViewById(R.id.bWebAdmin);
         linearLayout=root.findViewById(R.id.idlayout);
         linearLayoutinfo=root.findViewById(R.id.idlayoutbottoni);
 
@@ -116,6 +119,33 @@ public class HomeFragment extends Fragment {
 
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
                 startActivity(browserIntent);
+            }
+        });
+
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String web="https://www.google.it/maps/search/";
+                //Toast.makeText(getContext(), "Bottone Web", Toast.LENGTH_LONG).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web+reservation.getStruttura()));
+                startActivity(browserIntent);
+            }
+        });
+
+        b6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:0123456789"));
+                startActivity(intent);
+            }
+        });
+
+        b7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                startActivity(intent);
             }
         });
 

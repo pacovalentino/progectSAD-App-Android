@@ -32,7 +32,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="900dp"
+            android:layout_height="1000dp"
             android:orientation="horizontal">
 
             <View
@@ -43,7 +43,7 @@
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="900dp"
+                android:layout_height="1000dp"
                 android:orientation="vertical">
                 <View
                     android:id="@+id/divider121212vc"
@@ -249,7 +249,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
 
-
+                <Button
+                    android:id="@+id/bWebAdmin"
+                    android:layout_width="359dp"
+                    android:layout_height="50dp"
+                    android:drawableLeft="@drawable/icon_web"
+                    android:padding="16dp"
+                    android:text="Visita il nostro sito web"
+                    android:textSize="12sp" />
+                <View
+                    android:id="@+id/divvssasavvisdsder1"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
                 <Button
                     android:id="@+id/bEmail"
                     android:layout_width="359dp"
@@ -258,7 +269,19 @@
                     android:padding="16dp"
                     android:text="Contattaci via email "
                     android:textSize="12sp" />
+                <View
+                    android:id="@+id/d2ivvsssdsder"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
+                <Button
+                    android:id="@+id/bCustomer"
+                    android:layout_width="359dp"
+                    android:layout_height="50dp"
+                    android:drawableLeft="@drawable/icon_customer"
+                    android:padding="16dp"
+                    android:text="Contatta l'amministratore"
+                    android:textSize="12sp" />
 
 
 
@@ -283,14 +306,14 @@
                     android:orientation="vertical">
 
                     <View
-                        android:id="@+id/divvssasavvisdsder"
+                        android:id="@+id/di3vvssasavvisdsder"
                         android:layout_width="match_parent"
                         android:layout_height="10dp" />
                     <Button
                         android:id="@+id/bWeb"
                         android:layout_width="359dp"
                         android:layout_height="50dp"
-                        android:drawableLeft="@drawable/icon_web"
+                        android:drawableLeft="@drawable/icon_hospital"
                         android:padding="16dp"
                         android:text="Visita il sito web della struttura"
                         android:textSize="12sp" />
@@ -307,6 +330,19 @@
                         android:drawableLeft="@drawable/icon_call"
                         android:padding="16dp"
                         android:text="Chiama Struttura"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:id="@+id/divvssasavvisdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+                    <Button
+                        android:id="@+id/bMap"
+                        android:layout_width="359dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/icon_map"
+                        android:padding="16dp"
+                        android:text="Raggiungi la struttura"
                         android:textSize="12sp" />
                 </LinearLayout>
 
