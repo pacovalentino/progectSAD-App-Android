@@ -23,7 +23,7 @@
         android:textColorHint="#9C9999"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/logoid" />
 
     <EditText
         android:id="@+id/passId"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logoid"
         android:layout_width="245dp"
         android:layout_height="201dp"
         android:layout_marginTop="40dp"
@@ -74,6 +74,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reservation\n Successful"
+        android:textColor="#673AB7"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

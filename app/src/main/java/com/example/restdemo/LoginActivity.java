@@ -47,9 +47,10 @@ public class LoginActivity extends AppCompatActivity {
     String URL="http://10.0.2.2:8000/api/login";
     private LoginResponse loginResponse;
     Gson g = new Gson();
-    TextView regText;
+    TextView regText,textView;
     ProgressDialog progressDialog;
     AlertDialog.Builder alertDialogBuilder;
+    ImageView imageView;
 
 
     @Override
@@ -59,14 +60,26 @@ public class LoginActivity extends AppCompatActivity {
 
         String emailRESERV = (String) getIntent().getSerializableExtra("email_reserv");
 
-
-
         loginButton = findViewById(R.id.button);
         etMail = findViewById(R.id.emailId);
         etPassword = findViewById(R.id.passId);
         regText=findViewById(R.id.notaccountId);
+        imageView=findViewById(R.id.logoid);
+
+        textView=findViewById(R.id.textViewid);
+        textView.setVisibility(View.INVISIBLE);
+
+        final Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
 
         if(emailRESERV!=null){
+
+            etMail.setVisibility(View.INVISIBLE);
+            etPassword.setVisibility(View.INVISIBLE);
+            loginButton.setVisibility(View.INVISIBLE);
+            regText.setVisibility(View.INVISIBLE);
+            imageView.setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.VISIBLE);
+
             etMail.setText(emailRESERV);
             etPassword.setText("test"); //la pass non me la passo quindi la metto a mano dato che è sempre uguale
 
@@ -80,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        final Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
+
 
         regText.setOnClickListener(new View.OnClickListener() {
             @Override
