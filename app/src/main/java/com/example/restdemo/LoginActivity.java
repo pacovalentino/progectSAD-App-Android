@@ -165,7 +165,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                     jsonObject2.getString("time"),
                                                                     jsonObject2.getString("batch_id"),
                                                                     jsonObject2.getString("name"),
-                                                                    jsonObject2.getString("state")
+                                                                    jsonObject2.getString("state"),
+                                                                    jsonObject2.getString("phone_number")
                                                             );
                                                             Log.e("reservation stru:", reservation.getStruttura());
 

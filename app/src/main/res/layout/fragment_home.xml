@@ -259,31 +259,9 @@
                     android:text="Contattaci via email "
                     android:textSize="12sp" />
 
-                <View
-                    android:id="@+id/divvsssdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
 
-                <Button
-                    android:id="@+id/bCall"
-                    android:layout_width="359dp"
-                    android:layout_height="50dp"
-                    android:drawableLeft="@drawable/icon_call"
-                    android:padding="16dp"
-                    android:text="Chiama l'amministratore"
-                    android:textSize="12sp" />
-                <View
-                    android:id="@+id/divvssasavvisdsder"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-                <Button
-                    android:id="@+id/bWeb"
-                    android:layout_width="359dp"
-                    android:layout_height="50dp"
-                    android:drawableLeft="@drawable/icon_web"
-                    android:padding="16dp"
-                    android:text="Visita il nostro sito web "
-                    android:textSize="12sp" />
+
+
                 <View
                     android:id="@+id/divvvfdfdvisdsder"
                     android:layout_width="match_parent"
@@ -296,6 +274,41 @@
                     android:padding="16dp"
                     android:text="Metti mi piace alla nostra pagina facebook "
                     android:textSize="12sp" />
+
+                <!-- Da aggiungere i nuovi botti per le info (servizio clienti e sito web nostro)-->
+                <LinearLayout
+                    android:id="@+id/idlayoutbottoni"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/divvssasavvisdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+                    <Button
+                        android:id="@+id/bWeb"
+                        android:layout_width="359dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/icon_web"
+                        android:padding="16dp"
+                        android:text="Visita il sito web della struttura"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:id="@+id/divvsssdsder"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <Button
+                        android:id="@+id/bCall"
+                        android:layout_width="359dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/icon_call"
+                        android:padding="16dp"
+                        android:text="Chiama Struttura"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
 
 

@@ -10,14 +10,25 @@ public class Reservation  implements Serializable {
     String stock_vaccino;
     String vaccino;
     String stato;
+    String tel;
 
-    public Reservation(String struttura, String data, String time, String stock_vaccino,String vaccino, String stato) {
+
+    public Reservation(String struttura, String data, String time, String stock_vaccino, String vaccino, String stato, String tel) {
         this.struttura = struttura;
         this.data = data;
         this.time = time;
         this.stock_vaccino = stock_vaccino;
         this.vaccino=vaccino;
         this.stato = stato;
+        this.tel=tel;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public String getVaccino() {

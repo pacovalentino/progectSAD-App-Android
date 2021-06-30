@@ -23,7 +23,7 @@ import response.Reservation;
 public class HomeFragment extends Fragment {
 
     TextView tV1, tV2,tV3,tV4,tV5,textView;
-    LinearLayout linearLayout;
+    LinearLayout linearLayout,linearLayoutinfo;
     Button b1,b2,b3,b4;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,13 +43,15 @@ public class HomeFragment extends Fragment {
         b3=root.findViewById(R.id.bWeb);
         b4=root.findViewById(R.id.bFacebook);
         linearLayout=root.findViewById(R.id.idlayout);
+        linearLayoutinfo=root.findViewById(R.id.idlayoutbottoni);
 
         String a = (String) getActivity().getIntent().getSerializableExtra("var");
+        final Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
 
         Log.e("variabile a",a);
         if(a.equals("addio")) {
 
-            Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
+
             tV1.setText(reservation.getStruttura());
             tV2.setText(reservation.getData());
             tV3.setText(reservation.getTime());
@@ -65,13 +67,16 @@ public class HomeFragment extends Fragment {
             params.width=0;
             linearLayout.setLayoutParams(params);
             linearLayout.setVisibility(View.INVISIBLE);
+            linearLayoutinfo.setLayoutParams(params);
+            linearLayoutinfo.setVisibility(View.INVISIBLE);
+
         }
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Bottone Email", Toast.LENGTH_LONG).show();
-                //Codice
+                //Toast.makeText(getContext(), "Bottone Email", Toast.LENGTH_LONG).show();
+
                 Intent email= new Intent(Intent.ACTION_SENDTO);
                 email.setData(Uri.parse("mailto:your.eamil@gmail.com"));
                 email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
@@ -82,19 +87,23 @@ public class HomeFragment extends Fragment {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Bottone Call", Toast.LENGTH_LONG).show();
-                //Codice
+                //Toast.makeText(getContext(), "Bottone Call", Toast.LENGTH_LONG).show();
+
+                String tel="tel:"+reservation.getTel();
+                if(tel.length()<5){
+                    tel="tel:0";
+                }
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:0123456789"));
+                intent.setData(Uri.parse(tel));
                 startActivity(intent);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Bottone Web", Toast.LENGTH_LONG).show();
-                //Codice
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                String web="https://www.google.it/search?q=";
+                //Toast.makeText(getContext(), "Bottone Web", Toast.LENGTH_LONG).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web+reservation.getStruttura()));
                 startActivity(browserIntent);
             }
         });
@@ -103,8 +112,8 @@ public class HomeFragment extends Fragment {
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Bottone Facebook", Toast.LENGTH_LONG).show();
-                //Codice
+                //Toast.makeText(getContext(), "Bottone Facebook", Toast.LENGTH_LONG).show();
+
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
                 startActivity(browserIntent);
             }
