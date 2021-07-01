@@ -58,6 +58,7 @@
                     android:textColor="#673AB7"
                     android:textSize="30dp" />
 
+
                 <View
                     android:id="@+id/dividvccver"
                     android:layout_width="match_parent"
@@ -302,7 +303,7 @@
                 <LinearLayout
                     android:id="@+id/idlayoutbottoni"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="700dp"
                     android:orientation="vertical">
 
                     <View

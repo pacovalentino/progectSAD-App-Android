@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.restdemo.R;
@@ -25,6 +27,9 @@ public class HomeFragment extends Fragment {
     TextView tV1, tV2,tV3,tV4,tV5,textView;
     LinearLayout linearLayout,linearLayoutinfo;
     Button b1,b2,b3,b4,b5,b6,b7;
+
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class HomeFragment extends Fragment {
         b7=root.findViewById(R.id.bWebAdmin);
         linearLayout=root.findViewById(R.id.idlayout);
         linearLayoutinfo=root.findViewById(R.id.idlayoutbottoni);
+
 
         String a = (String) getActivity().getIntent().getSerializableExtra("var");
         final Reservation reservation = (Reservation) getActivity().getIntent().getSerializableExtra("get_reservation_by_mail");
@@ -153,7 +159,11 @@ public class HomeFragment extends Fragment {
 
 
 
+
         return root;
     }
+
+
+
 
 }
