@@ -44,6 +44,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -263,6 +265,9 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                 try {
                     Log.e("Variabile structure ",s);
                     JSONObject jsonObject=new JSONObject(s);
+
+                    Toast.makeText(getContext(), "ok", Toast.LENGTH_LONG).show();
+
                     JSONArray jsonArray =jsonObject.getJSONArray("structures");
 
                     final String[] id_strutture = new String [jsonArray.length()];
@@ -281,13 +286,20 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         },new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
+                Integer code = volleyError.networkResponse.statusCode;
+                if (code == 401) {
+                    // TOKEN NON VALIDO TORNA AL LOGIN
+                    Toast.makeText(getContext(), "token non valido", Toast.LENGTH_LONG).show();
+                }
+                // ERRORE NON GESTITO MOSTRARE SOLO MESSAGGIO
+//                Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
             }
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("authorization", "Bearer "+tok);
+                params.put("Accept", "application/json");
                 return params;
             }
         };
