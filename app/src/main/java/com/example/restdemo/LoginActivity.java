@@ -74,6 +74,24 @@ public class LoginActivity extends AppCompatActivity {
 
         final Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
 
+        String code = getIntent().getStringExtra("code");
+        Log.e("CODE:", code != null ? code : "codice non presente");
+        if (code != null) {
+            if (code.equals("401")) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Token scaduto, effettuare nuovamente il login",
+                        Toast.LENGTH_LONG
+                ).show();
+            } else {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Si è verificato un errore dal server",
+                        Toast.LENGTH_LONG
+                ).show();
+            }
+        }
+
         if(emailRESERV!=null){
 
             etMail.setVisibility(View.INVISIBLE);

@@ -38,6 +38,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.restdemo.HomeActivity;
 import com.example.restdemo.LoginActivity;
 import com.example.restdemo.R;
+import com.example.restdemo.RegisterActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -112,74 +113,63 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
                 if(editStructure.getText().toString().equals("") || editText.getText().toString().equals("") || editRegion.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Controlla se ogni campo è completo", Toast.LENGTH_LONG).show();
-                } else{
-
-
-
-                    StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String s) {
-                            Log.e("Variabile reservation ", s);
-                            if (s.equals("{\"reservation\":\"error\"}")) {
-                                Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
-                            } else if (s.equals("{\"reservation\":\"success\"}")) {
-
-                                final Intent form_intent = new Intent(getContext(),LoginActivity.class);
-
-
-                                progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
-                                progressDialog.setMessage("Loading..."); // Setting Message
-                                //progressDialog.setTitle("ProgressDialog"); // Setting Title
-                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                                progressDialog.show(); // Display Progress Dialog
-                                progressDialog.setCancelable(false);
-                                new Thread(new Runnable() {
-                                    public void run() {
-                                        try {
-                                            Thread.sleep(1000);
-                                            form_intent.putExtra("email_reserv",patient.getEmail());
-                                            startActivity(form_intent);
-                                            getActivity().finish();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                        progressDialog.dismiss();
-                                    }
-                                }).start();
-
-
-
-                            } else
-                                Toast.makeText(getContext(), "Incorrect Details", Toast.LENGTH_LONG).show();
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(getContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
-                        }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams() {
-                            Map<String, String> parameters = new HashMap<>();
-                            parameters.put("patient_id", patient.getId());
-                            parameters.put("date", editText.getText().toString());
-                            parameters.put("structure_id",testStrutt.getText().toString());
-                            return parameters;
-                        }
-
-                        @Override
-                        public Map<String, String> getHeaders() throws AuthFailureError {
-                            Map<String, String>  params = new HashMap<String, String>();
-                            params.put("authorization", "Bearer "+tok);
-                            return params;
-                        }
-                    };
-                    RequestQueue rQueue = Volley.newRequestQueue(getContext());
-                    rQueue.add(request);
-
-
-
+                    return;
                 }
+
+                StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        try {
+                            Log.e("Variabile reservation ", s);
+                            final Intent form_intent = new Intent(getContext(),LoginActivity.class);
+
+                            progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
+                            progressDialog.setMessage("Loading..."); // Setting Message
+                            //progressDialog.setTitle("ProgressDialog"); // Setting Title
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                            progressDialog.show(); // Display Progress Dialog
+                            progressDialog.setCancelable(false);
+                            new Thread(new Runnable() {
+                                public void run() {
+                                    try {
+                                        Thread.sleep(1000);
+                                        form_intent.putExtra("email_reserv",patient.getEmail());
+                                        startActivity(form_intent);
+                                        getActivity().finish();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    progressDialog.dismiss();
+                                }
+                            }).start();
+                        } catch (Exception exception) {
+                            Toast.makeText(getContext(), "Errore: " + exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(getContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> parameters = new HashMap<>();
+                        parameters.put("patient_id", patient.getId());
+                        parameters.put("date", editText.getText().toString());
+                        parameters.put("structure_id",testStrutt.getText().toString());
+                        return parameters;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<String, String>();
+                        params.put("authorization", "Bearer "+tok);
+                        return params;
+                    }
+                };
+                RequestQueue rQueue = Volley.newRequestQueue(getContext());
+                rQueue.add(request);
              }
         });
 
@@ -255,9 +245,8 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     }
 
     public void show(){
-
         Editable urlComplete=editRegion.getText();
-        final String tok=(String) getActivity().getIntent().getSerializableExtra("token");
+        final String tok = (String) getActivity().getIntent().getSerializableExtra("token");
 
         StringRequest request = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-structures-by-region/"+urlComplete, new Response.Listener<String>(){
             @Override
@@ -287,12 +276,17 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Integer code = volleyError.networkResponse.statusCode;
+                Log.e("CODICE", code.toString());
                 if (code == 401) {
-                    // TOKEN NON VALIDO TORNA AL LOGIN
-                    Toast.makeText(getContext(), "token non valido", Toast.LENGTH_LONG).show();
+                    Log.e("401", "TOKEN SCADUTO, TORNO AL LOGIN");
+                    Intent form_intent = new Intent(getContext(), LoginActivity.class);
+                    form_intent.putExtra("code", code.toString());
+                    startActivity(form_intent);
+                    requireActivity().finish();
+                } else {
+                    // ERRORE NON GESTITO MOSTRARE SOLO MESSAGGIO
+                    Toast.makeText(getContext(), "Errore interno del server: " + code, Toast.LENGTH_LONG).show();
                 }
-                // ERRORE NON GESTITO MOSTRARE SOLO MESSAGGIO
-//                Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
             }
         }){
             @Override
