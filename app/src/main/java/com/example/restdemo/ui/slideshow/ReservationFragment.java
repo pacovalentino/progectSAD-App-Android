@@ -27,6 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -60,7 +62,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     static EditText editText,editRegion,editStructure;
     String URL="http://10.0.2.2:8000/api/reservation";
     ProgressDialog progressDialog;
-
+    final String tok=(String) getActivity().getIntent().getSerializableExtra("token");
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,6 +71,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         View root = inflater.inflate(R.layout.fragment_reservation, container, false);
 
         final Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
+
 
         testStrutt=root.findViewById(R.id.textViewIdStruttura);
         editStructure=root.findViewById(R.id.editStructure);
@@ -160,6 +163,13 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                             parameters.put("date", editText.getText().toString());
                             parameters.put("structure_id",testStrutt.getText().toString());
                             return parameters;
+                        }
+
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            params.put("authorization", "Bearer "+tok);
+                            return params;
                         }
                     };
                     RequestQueue rQueue = Volley.newRequestQueue(getContext());
@@ -272,7 +282,14 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             public void onErrorResponse(VolleyError volleyError) {
                 Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("authorization", "Bearer "+tok);
+                return params;
+            }
+        };
         RequestQueue rQueue = Volley.newRequestQueue(getContext());
         rQueue.add(request);
     }

@@ -24,6 +24,7 @@ public class GalleryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
+        String tok=(String) getActivity().getIntent().getSerializableExtra("token");
         //Log.e("Prova: ",patient.getFirst_name());
 
         t1=root.findViewById(R.id.t1);

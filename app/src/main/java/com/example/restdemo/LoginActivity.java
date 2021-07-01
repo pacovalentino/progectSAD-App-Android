@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -51,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     AlertDialog.Builder alertDialogBuilder;
     ImageView imageView;
+    String Token;
 
 
     @Override
@@ -118,13 +121,16 @@ public class LoginActivity extends AppCompatActivity {
                     StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){
                         @Override
                         public void onResponse(String s) {
-                            Log.e("Variabile login ",s);
+                            Log.e("Variabile login + token",s);
 
                             loginResponse = g.fromJson(s, LoginResponse.class);
 
+
                             if(loginResponse.getLogin().equals("success")){
-                                //Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
-                                //Finestra di dialogo
+                                //Token
+                                Token = loginResponse.getToken();
+
+                                Log.e("Token",Token);
 
                                 StringRequest request = new StringRequest(Request.Method.POST, "http://10.0.2.2:8000/api/patient", new Response.Listener<String>(){
                                     @Override
@@ -202,6 +208,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         Thread.sleep(2800);
                                                         //Intent form_intent = new Intent(LoginActivity.this,HomeActivity.class);
                                                         form_intent.putExtra("patient",patient);
+                                                        form_intent.putExtra("token",Token);
                                                         startActivity(form_intent);
                                                         finish();
                                                     } catch (Exception e) {
@@ -224,11 +231,10 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }) {
                                     @Override
-                                    protected Map<String, String> getParams() {
-                                        Map<String, String> parameters = new HashMap<>();
-                                        parameters.put("email", etMail.getText().toString());
-                                        parameters.put("password", etPassword.getText().toString());
-                                        return parameters;
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        Map<String, String>  params = new HashMap<String, String>();
+                                        params.put("authorization", "Bearer "+Token);
+                                        return params;
                                     }
                                 };
                                 RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
@@ -253,6 +259,12 @@ public class LoginActivity extends AppCompatActivity {
                             parameters.put("password", etPassword.getText().toString());
 
                             return parameters;
+                        }
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            params.put("authorization", "Bearer "+Token);
+                            return params;
                         }
                     };
                     RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
