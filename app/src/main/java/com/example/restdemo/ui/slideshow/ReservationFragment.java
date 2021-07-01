@@ -62,7 +62,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     static EditText editText,editRegion,editStructure;
     String URL="http://10.0.2.2:8000/api/reservation";
     ProgressDialog progressDialog;
-    final String tok=(String) getActivity().getIntent().getSerializableExtra("token");
+
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,7 +71,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         View root = inflater.inflate(R.layout.fragment_reservation, container, false);
 
         final Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
-
+        final String tok=(String) getActivity().getIntent().getSerializableExtra("token");
 
         testStrutt=root.findViewById(R.id.textViewIdStruttura);
         editStructure=root.findViewById(R.id.editStructure);
@@ -255,6 +255,7 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     public void show(){
 
         Editable urlComplete=editRegion.getText();
+        final String tok=(String) getActivity().getIntent().getSerializableExtra("token");
 
         StringRequest request = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-structures-by-region/"+urlComplete, new Response.Listener<String>(){
             @Override

@@ -2,6 +2,7 @@ package com.example.restdemo.ui.gallery;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class GalleryFragment extends Fragment {
 
         Patient patient = (Patient) getActivity().getIntent().getSerializableExtra("patient");
         String tok=(String) getActivity().getIntent().getSerializableExtra("token");
-        //Log.e("Prova: ",patient.getFirst_name());
+
 
         t1=root.findViewById(R.id.t1);
         assert patient != null;

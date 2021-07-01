@@ -190,7 +190,22 @@ public class LoginActivity extends AppCompatActivity {
                                                 public void onErrorResponse(VolleyError volleyError) {
                                                     Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
                                                 }
-                                            });
+                                            }){
+
+                                                @Override
+                                                protected Map<String, String> getParams() {
+                                                    Map<String, String> parameters = new HashMap<>();
+                                                    //parameters.put("email", etMail.getText().toString());
+
+                                                    return parameters;
+                                                }
+                                                @Override
+                                                public Map<String, String> getHeaders() throws AuthFailureError {
+                                                    Map<String, String>  params = new HashMap<String, String>();
+                                                    params.put("authorization", "Bearer "+Token);
+                                                    return params;
+                                                }
+                                            };
                                             RequestQueue rQueue1 = Volley.newRequestQueue(getApplicationContext());
                                             rQueue1.add(request1);
 
@@ -230,6 +245,15 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
                                     }
                                 }) {
+
+                                    @Override
+                                    protected Map<String, String> getParams() {
+                                        Map<String, String> parameters = new HashMap<>();
+                                        parameters.put("email", etMail.getText().toString());
+
+                                        return parameters;
+                                    }
+
                                     @Override
                                     public Map<String, String> getHeaders() throws AuthFailureError {
                                         Map<String, String>  params = new HashMap<String, String>();
