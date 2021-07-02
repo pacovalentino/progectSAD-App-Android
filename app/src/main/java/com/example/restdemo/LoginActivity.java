@@ -1,9 +1,6 @@
 package com.example.restdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -15,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,21 +21,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.restdemo.ui.gallery.GalleryFragment;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
 import response.LoginResponse;
 import response.Patient;
 import response.Reservation;
-import response.Structure;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -206,6 +194,12 @@ public class LoginActivity extends AppCompatActivity {
                                             },new Response.ErrorListener(){
                                                 @Override
                                                 public void onErrorResponse(VolleyError volleyError) {
+                                                    Integer code = volleyError.networkResponse.statusCode;
+                                                    if (code ==401){
+                                                        Toast.makeText(getApplicationContext(), "Token non valido", Toast.LENGTH_LONG).show();
+                                                        startActivity(new Intent(getApplicationContext() , LoginActivity.class));
+                                                        finish();
+                                                    }
                                                     Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
                                                 }
                                             }){
@@ -214,13 +208,13 @@ public class LoginActivity extends AppCompatActivity {
                                                 protected Map<String, String> getParams() {
                                                     Map<String, String> parameters = new HashMap<>();
                                                     //parameters.put("email", etMail.getText().toString());
-
                                                     return parameters;
                                                 }
                                                 @Override
                                                 public Map<String, String> getHeaders() throws AuthFailureError {
                                                     Map<String, String>  params = new HashMap<String, String>();
                                                     params.put("authorization", "Bearer "+Token);
+                                                    params.put("Accept", "application/json");
                                                     return params;
                                                 }
                                             };
@@ -260,6 +254,12 @@ public class LoginActivity extends AppCompatActivity {
                                 },new Response.ErrorListener(){
                                     @Override
                                     public void onErrorResponse(VolleyError volleyError) {
+                                        Integer code = volleyError.networkResponse.statusCode;
+                                        if (code ==401){
+                                            Toast.makeText(getApplicationContext(), "Token non valido", Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(getApplicationContext() , LoginActivity.class));
+                                            finish();
+                                        }
                                         Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
                                     }
                                 }) {
@@ -276,6 +276,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public Map<String, String> getHeaders() throws AuthFailureError {
                                         Map<String, String>  params = new HashMap<String, String>();
                                         params.put("authorization", "Bearer "+Token);
+                                        params.put("Accept", "application/json");
                                         return params;
                                     }
                                 };
@@ -291,6 +292,12 @@ public class LoginActivity extends AppCompatActivity {
                     },new Response.ErrorListener(){
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
+                            Integer code = volleyError.networkResponse.statusCode;
+                            if (code ==401){
+                                Toast.makeText(getApplicationContext(), "Token non valido", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext() , LoginActivity.class));
+                                finish();
+                            }
                             Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
                         }
                     }) {
@@ -306,6 +313,7 @@ public class LoginActivity extends AppCompatActivity {
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String>  params = new HashMap<String, String>();
                             params.put("authorization", "Bearer "+Token);
+                            params.put("Accept", "application/json");
                             return params;
                         }
                     };
