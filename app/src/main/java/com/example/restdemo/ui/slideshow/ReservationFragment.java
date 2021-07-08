@@ -105,11 +105,11 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                         @Override
                         public void onResponse(String s) {
                             Log.e("Variabile reservation ", s);
-                            if (s.equals("{\"reservation\":\"error\"}")) {
+                            if (s.equals("{\"reservation\":\"error\",\"message\":\"Nessuno stock disponibile\",\"code\":500}")) {
                                 Toast.makeText(getContext(), "Reservation error", Toast.LENGTH_LONG).show();
-                            } else if (s.equals("{\"reservation\":\"success\"}")) {
+                            } else if (s.equals("{\"reservation\":\"success\",\"code\":200}")) {
 
-                                final Intent form_intent = new Intent(getContext(), HomeActivity.class);
+                                final Intent form_intent = new Intent(getContext(), LoginActivity.class);
 
 
                                 progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
