@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        String tok=(String) getActivity().getIntent().getSerializableExtra("token");
 
         tV1 = root.findViewById(R.id.t1);
         textView=root.findViewById(R.id.myreservationID);

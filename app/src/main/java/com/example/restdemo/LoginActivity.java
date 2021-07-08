@@ -49,7 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        String emailRESERV = (String) getIntent().getSerializableExtra("email_reserv");
+        final String tokenRESERV = (String) getIntent().getSerializableExtra("token_reserv");
+        final Patient patientRESERV = (Patient) getIntent().getSerializableExtra("patient_reserv");
 
         loginButton = findViewById(R.id.button);
         etMail = findViewById(R.id.emailId);
@@ -80,8 +81,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        if(emailRESERV!=null){
+        if(patientRESERV!=null){
 
+            Log.e("debug email:", patientRESERV.getEmail());
             etMail.setVisibility(View.INVISIBLE);
             etPassword.setVisibility(View.INVISIBLE);
             loginButton.setVisibility(View.INVISIBLE);
@@ -89,16 +91,78 @@ public class LoginActivity extends AppCompatActivity {
             imageView.setVisibility(View.INVISIBLE);
             textView.setVisibility(View.VISIBLE);
 
-            etMail.setText(emailRESERV);
-            etPassword.setText("test"); //la pass non me la passo quindi la metto a mano dato che è sempre uguale
-
-            //Autoclick
-            new Handler().postDelayed(new Runnable() {
+            StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-login/"+patientRESERV.getEmail(), new Response.Listener<String>(){
                 @Override
-                public void run() {
-                    loginButton.performClick();
+                public void onResponse(String s) {
+                    try {
+                        Log.e("login RESERVE:", s);
+                        JSONObject jsonObject = new JSONObject(s);
+                        loginResponse = g.fromJson(s, LoginResponse.class);
+                        if(s.equals("{\"login\":\"success\",\"code\":200}")){
+
+                            progressDialog = new ProgressDialog(LoginActivity.this, R.style.DialogTheme);
+                            progressDialog.setMessage("Loading..."); // Setting Message
+                            //progressDialog.setTitle("ProgressDialog"); // Setting Title
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                            progressDialog.show(); // Display Progress Dialog
+                            progressDialog.setCancelable(false);
+                            new Thread(new Runnable() {
+                                public void run() {
+                                    try {
+                                        Thread.sleep(2000);
+                                        Intent form_intent1 = new Intent(LoginActivity.this,HomeActivity.class);
+                                        form_intent1.putExtra("patient",patientRESERV);
+                                        form_intent1.putExtra("token",tokenRESERV);
+                                        Log.e("debug yoyo:", patientRESERV.getEmail());
+                                        if (tokenRESERV != null) {
+                                            Log.e("debug bla bla:", tokenRESERV);
+                                        }
+                                        startActivity(form_intent1);
+                                        finish();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    progressDialog.dismiss();
+                                }
+                            }).start();
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Incorrect Details", Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }, 0);
+            },new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Integer code = volleyError.networkResponse.statusCode;
+                    if (code ==401){
+                        Toast.makeText(getApplicationContext(), "Token non valido", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext() , LoginActivity.class));
+                        finish();
+                    }
+                    Toast.makeText(getApplicationContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
+                }
+            }){
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> parameters = new HashMap<>();
+                    //parameters.put("email", etMail.getText().toString());
+                    return parameters;
+                }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String>  params = new HashMap<String, String>();
+                    params.put("authorization", "Bearer "+tokenRESERV);
+                    params.put("Accept", "application/json");
+                    return params;
+                }
+            };
+            RequestQueue rQueue1 = Volley.newRequestQueue(getApplicationContext());
+            rQueue1.add(request1);
+
 
         }
 
