@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
+import com.example.restdemo.LoginActivity;
 import com.example.restdemo.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -119,9 +120,16 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFail(VolleyError volleyError) {
-                form_intent.putExtra("reserved", "no");
-                refreshButton.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
+                Integer code = volleyError.networkResponse.statusCode;
+                if (code == 401 || code == 403) {
+                    Toast.makeText(getContext(), "Sessione scaduta", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    getActivity().finish();
+                } else {
+                    form_intent.putExtra("reserved", "no");
+                    refreshButton.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -206,9 +214,16 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onFail(VolleyError volleyError) {
-                        form_intent.putExtra("reserved", "no");
-                        refreshButton.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
+                        Integer code = volleyError.networkResponse.statusCode;
+                        if (code == 401 || code == 403) {
+                            Toast.makeText(getContext(), "Sessione scaduta", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getContext(), LoginActivity.class));
+                            getActivity().finish();
+                        } else {
+                            form_intent.putExtra("reserved", "no");
+                            refreshButton.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
