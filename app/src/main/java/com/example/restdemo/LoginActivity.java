@@ -85,12 +85,13 @@ public class LoginActivity extends AppCompatActivity {
 
             Log.e("debug email:", patientRESERV.getEmail());
             etMail.setVisibility(View.INVISIBLE);
-            etPassword.setVisibility(View.INVISIBLE);
-            loginButton.setVisibility(View.INVISIBLE);
+            etMail.setText(patientRESERV.getEmail());
+            loginButton.setText("Confirm");
             regText.setVisibility(View.INVISIBLE);
             imageView.setVisibility(View.INVISIBLE);
             textView.setVisibility(View.VISIBLE);
 
+            /*
             StringRequest request1 = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-login/"+patientRESERV.getEmail(), new Response.Listener<String>(){
                 @Override
                 public void onResponse(String s) {
@@ -163,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
             RequestQueue rQueue1 = Volley.newRequestQueue(getApplicationContext());
             rQueue1.add(request1);
 
+             */
 
         }
 
