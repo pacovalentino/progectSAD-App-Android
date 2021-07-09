@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.restdemo.HomeActivity;
 import com.example.restdemo.LoginActivity;
 import com.example.restdemo.R;
 import org.json.JSONArray;
@@ -106,29 +109,36 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                     public void onSuccess(JSONObject result) {
                         final Intent form_intent = new Intent(getContext(), LoginActivity.class);
 
-                            progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
-                            progressDialog.setMessage("Loading..."); // Setting Message
-                            //progressDialog.setTitle("ProgressDialog"); // Setting Title
-                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                            progressDialog.show(); // Display Progress Dialog
-                            progressDialog.setCancelable(false);
-                            new Thread(new Runnable() {
-                                public void run() {
-                                    try {
-                                        Thread.sleep(1000);
-                                        form_intent.putExtra("email_reserv", patient.getEmail());
-                                        startActivity(form_intent);
-                                        getActivity().finish();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                    progressDialog.dismiss();
+                        progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
+                        progressDialog.setMessage("Loading..."); // Setting Message
+                        progressDialog.setTitle("Success Reservation"); // Setting Title
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                        progressDialog.show(); // Display Progress Dialog
+                        progressDialog.setCancelable(false);
+                        new Thread(new Runnable() {
+                            public void run() {
+                                try {
+                                    Thread.sleep(2000);
+                                    form_intent.putExtra("patient_reserv",patient);
+                                    form_intent.putExtra("token_reserv",tok);
+                                    startActivity(form_intent);
+                                    getActivity().finish();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            }).start();
+                                progressDialog.dismiss();
+                            }
+                        }).start();
                     }
 
                     @Override
                     public void onFail(VolleyError volleyError) {
+                        Integer code = volleyError.networkResponse.statusCode;
+                        if (code == 401 || code == 403){
+                            Toast.makeText(getContext(), "Sessione scaduta", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getContext() , LoginActivity.class));
+                            getActivity().finish();
+                        }
                         StringBuilder toastErrors = VolleyErrorHandler.getToastMessage(volleyError);
                         Toast.makeText(getContext(), toastErrors, Toast.LENGTH_LONG).show();
                     }
