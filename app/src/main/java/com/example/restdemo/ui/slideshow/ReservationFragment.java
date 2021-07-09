@@ -23,15 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.restdemo.HomeActivity;
 import com.example.restdemo.LoginActivity;
 import com.example.restdemo.R;
@@ -39,9 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
+import api.GetStructuresByRegionApi;
 import api.MakeReservationApi;
 import entity.Patient;
 import api.interfaces.ServerCallback;
@@ -71,16 +63,12 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         buttonStr=root.findViewById(R.id.buttonStructure);
         btRegion=root.findViewById(R.id.buttonRegion);
 
-
-        //****************Codice
-
         editText=root.findViewById(R.id.editdata);
         button=root.findViewById(R.id.buttonData);
         btReserve=root.findViewById(R.id.buttonReserve);
 
-        String a = (String) getActivity().getIntent().getSerializableExtra("var");
-        if(a.equals("addio")) {
-            //Se è presente la reservation
+        String reserved = getActivity().getIntent().getStringExtra("reserved");
+        if(reserved.equals("yes")) {
             editText.setFocusable(false);
             editText.setEnabled(false);
             editRegion.setFocusable(false);
@@ -91,8 +79,8 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
             buttonStr.setEnabled(false);
             btRegion.setEnabled(false);
             btReserve.setEnabled(false);
-
-        } else if(a.equals("ciao")){
+            btReserve.setEnabled(false);
+        } else if(reserved.equals("no")){
             btReserve.setEnabled(true);
         }
 
@@ -107,20 +95,20 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                 MakeReservationApi.call(getContext(), patient, editText.getText().toString(), testStrutt.getText().toString(), tok, new ServerCallback() {
                     @Override
                     public void onSuccess(JSONObject result) {
-                        final Intent form_intent = new Intent(getContext(), LoginActivity.class);
+                        final Intent form_intent = new Intent(getContext(), HomeActivity.class);
 
                         progressDialog = new ProgressDialog(getContext(), R.style.DialogTheme);
-                        progressDialog.setMessage("Loading..."); // Setting Message
-                        progressDialog.setTitle("Success Reservation"); // Setting Title
-                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                        progressDialog.show(); // Display Progress Dialog
+                        progressDialog.setMessage("Caricamento...");
+                        progressDialog.setTitle("Prenotazione effettuata con successo");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressDialog.show();
                         progressDialog.setCancelable(false);
                         new Thread(new Runnable() {
                             public void run() {
                                 try {
                                     Thread.sleep(2000);
-                                    form_intent.putExtra("patient_reserv",patient);
-                                    form_intent.putExtra("token_reserv",tok);
+                                    form_intent.putExtra("patient",patient);
+                                    form_intent.putExtra("token",tok);
                                     startActivity(form_intent);
                                     getActivity().finish();
                                 } catch (Exception e) {
@@ -138,9 +126,10 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
                             Toast.makeText(getContext(), "Sessione scaduta", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getContext() , LoginActivity.class));
                             getActivity().finish();
+                        } else {
+                            StringBuilder toastErrors = VolleyErrorHandler.getToastMessage(volleyError);
+                            Toast.makeText(getContext(), toastErrors, Toast.LENGTH_LONG).show();
                         }
-                        StringBuilder toastErrors = VolleyErrorHandler.getToastMessage(volleyError);
-                        Toast.makeText(getContext(), toastErrors, Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -180,19 +169,14 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-
     }
 
 
     public static class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-
-
             final Calendar calendar = Calendar.getInstance();
+
             int yy = calendar.get(Calendar.YEAR);
             int mm = calendar.get(Calendar.MONTH);
             int dd = calendar.get(Calendar.DAY_OF_MONTH);
@@ -200,75 +184,49 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         }
 
         public void onDateSet(DatePicker view, int yy, int mm, int dd) {
-
             populateSetDate(yy, mm+1, dd);
         }
 
         public void populateSetDate(int year, int month, int day) {
-            Log.e("Data",year +"/"+month +"/"+day);
-
-
-
             editText.setText(year+"-"+month+"-"+day);
-
-
-
         }
-
-
     }
 
     public void show(){
-
         Editable urlComplete=editRegion.getText();
         final String tok=(String) getActivity().getIntent().getSerializableExtra("token");
 
-        StringRequest request = new StringRequest(Request.Method.GET, "http://10.0.2.2:8000/api/get-structures-by-region/"+urlComplete, new Response.Listener<String>(){
+        GetStructuresByRegionApi.call(getContext(), urlComplete.toString(), tok, new ServerCallback() {
             @Override
-            public void onResponse(String s) {
+            public void onSuccess(JSONObject result) {
                 try {
-                    Log.e("Variabile structure ",s);
-                    JSONObject jsonObject=new JSONObject(s);
-                    JSONArray jsonArray =jsonObject.getJSONArray("structures");
-
-                    final String[] id_strutture = new String [jsonArray.length()];
-                    final String[] nome_strutture = new String [jsonArray.length()];
-                    for(int i=0;i<jsonArray.length();i++){
-                        nome_strutture[i]=jsonArray.getJSONObject(i).getString("name");
-                        id_strutture[i]=jsonArray.getJSONObject(i).getString("id");
-                        Log.e("Struttur1 debug",nome_strutture[i]+" "+id_strutture[i]);
-
+                    JSONArray structuresArray = result.getJSONArray("structures");
+                    final String[] id_strutture = new String [structuresArray.length()];
+                    final String[] nome_strutture = new String [structuresArray.length()];
+                    for (int i = 0; i < structuresArray.length(); i++){
+                        nome_strutture[i]=structuresArray.getJSONObject(i).getString("name");
+                        id_strutture[i]=structuresArray.getJSONObject(i).getString("id");
                     }
                     show1(id_strutture,nome_strutture);
                 } catch (JSONException e) {
+                    Toast.makeText(getContext(), "Errore nella risposta dal server", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
 
+            @Override
+            public void onFail(VolleyError volleyError) {
                 Integer code = volleyError.networkResponse.statusCode;
-                if (code ==401){
-                    Toast.makeText(getContext(), "Token non valido", Toast.LENGTH_LONG).show();
+                if (code == 401 || code == 403){
+                    Toast.makeText(getContext(), "Sessione scaduta", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getContext() , LoginActivity.class));
                     getActivity().finish();
+                } else {
+                    Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();
             }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("authorization", "Bearer "+tok);
-                params.put("Accept", "application/json");
-                return params;
-            }
-        };
-        RequestQueue rQueue = Volley.newRequestQueue(getContext());
-        rQueue.add(request);
+        });
     }
-
 
     public void show1(final String[] id_stru, final String[] struct)
     {
@@ -340,6 +298,4 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         });
         d.show();
     }
-
-
 }

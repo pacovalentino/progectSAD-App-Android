@@ -90,4 +90,13 @@ public class Reservation  implements Serializable {
     public void setStato(String stato) {
         this.stato = stato;
     }
+
+    public static String stateToLabel(String state)
+    {
+        if (state.equals("pending")) return "In Attesa di Conferma";
+        if (state.equals("confirmed")) return "Confermata";
+        if (state.equals("cancelled")) return "Annullata";
+        if (state.equals("completed")) return "Somministrazione Avvenuta";
+        return "Invalid state";
+    }
 }

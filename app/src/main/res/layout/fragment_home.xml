@@ -58,6 +58,14 @@
                     android:textColor="#673AB7"
                     android:textSize="30dp" />
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/refreshButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:rotation="17"
+                    android:src="@android:drawable/stat_notify_sync" />
+
                 <View
                     android:id="@+id/dividvccver"
                     android:layout_width="match_parent"
