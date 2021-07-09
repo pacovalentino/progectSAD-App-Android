@@ -67,6 +67,7 @@ public class HomeFragment extends Fragment {
                 try {
                     final Reservation reservation = new Reservation(result.getJSONObject("reservation"));
                     form_intent.putExtra("reserved", "yes");
+                    refreshButton.setVisibility(View.VISIBLE);
                     form_intent.putExtra("reservation", reservation);
                     tV1.setText(reservation.getStruttura());
                     tV2.setText(reservation.getData());
@@ -104,6 +105,7 @@ public class HomeFragment extends Fragment {
                     });
                 } catch (JSONException e) {
                     form_intent.putExtra("reserved", "no");
+                    refreshButton.setVisibility(View.INVISIBLE);
                     textView.setText("Make you Reservation");
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
                     params.height=0;
@@ -118,6 +120,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFail(VolleyError volleyError) {
                 form_intent.putExtra("reserved", "no");
+                refreshButton.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
             }
         });
@@ -180,6 +183,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             form_intent.putExtra("reserved", "yes");
+                            refreshButton.setVisibility(View.VISIBLE);
                             form_intent.putExtra("reservation", newReservation);
                             tV1.setText(newReservation.getStruttura());
                             tV2.setText(newReservation.getData());
@@ -188,6 +192,7 @@ public class HomeFragment extends Fragment {
                             tV5.setText(Reservation.stateToLabel(newReservation.getStato()));
                         } catch (JSONException e) {
                             form_intent.putExtra("reserved", "no");
+                            refreshButton.setVisibility(View.INVISIBLE);
                             textView.setText("Make you Reservation");
                             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
                             params.height=0;
@@ -202,6 +207,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onFail(VolleyError volleyError) {
                         form_intent.putExtra("reserved", "no");
+                        refreshButton.setVisibility(View.INVISIBLE);
                         Toast.makeText(getContext(), VolleyErrorHandler.getToastMessage(volleyError), Toast.LENGTH_LONG).show();
                     }
                 });
