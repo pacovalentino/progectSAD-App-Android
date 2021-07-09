@@ -7,31 +7,28 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
+
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import response.RegisterResponse;
+
+import api.RegisterApi;
+import api.payload.RegisterPayload;
+import api.interfaces.ServerCallback;
+import api.utils.VolleyErrorHandler;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView regText;
@@ -39,10 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etMail, etPass, etNome, etCogn, etData, etCF, etCit, etCap, etCall; //etAddr
     private RadioGroup radioGroup;
     private RadioButton male, female;
-    String URL="http://10.0.2.2:8000/api/register";
-    private RegisterResponse registerResponse;
-    Gson g = new Gson();
-    private CheckBox c1,c2,c3,c4,c5;
+    private CheckBox hearthDisease,allergy,immunodepression,anticoagulants,covid;
     AlertDialog.Builder alertDialogBuilder;
     DatePickerDialog picker;
 
@@ -87,90 +81,60 @@ public class RegisterActivity extends AppCompatActivity {
         radioGroup=findViewById(R.id.radiogroupId);
         male=(RadioButton)findViewById(R.id.maleId);
         female=(RadioButton)findViewById(R.id.femaleId);
-        c1=(CheckBox)findViewById(R.id.checkBox1);
-        c2=(CheckBox)findViewById(R.id.checkBox2);
-        c3=(CheckBox)findViewById(R.id.checkBox3);
-        c4=(CheckBox)findViewById(R.id.checkBox4);
-        c5=(CheckBox)findViewById(R.id.checkBox5);
+        hearthDisease=(CheckBox)findViewById(R.id.checkBox1);
+        allergy=(CheckBox)findViewById(R.id.checkBox2);
+        immunodepression=(CheckBox)findViewById(R.id.checkBox3);
+        anticoagulants=(CheckBox)findViewById(R.id.checkBox4);
+        covid=(CheckBox)findViewById(R.id.checkBox5);
 
         Bundle bundle= this.getIntent().getExtras();
         etMail.setText(bundle.getString("email"));
         etPass.setText(bundle.getString("password"));
 
-        //Resetta i tasti male e female
-        //radioGroup.clearCheck();
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etMail.getText().toString().equals("")
-                        || etPass.getText().toString().equals("")
-                        || etNome.getText().toString().equals("")
-                        || etCogn.getText().toString().equals("")
-                        || etData.getText().toString().equals("")
-                        || etCF.getText().toString().equals("")
-                        || etCit.getText().toString().equals("")
-                      //  || etAddr.getText().toString().equals("")
-                        || etCap.getText().toString().equals("")
-                        || etCall.getText().toString().equals("")
-                        || radioGroup.getCheckedRadioButtonId()==-1 ){
-                    Toast.makeText(getApplicationContext(), "Controlla se ogni campo è completo", Toast.LENGTH_LONG).show();
-                }else {
-                    StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String s) {
-                            Log.e("Variabile register ", s);
-                            registerResponse = g.fromJson(s, RegisterResponse.class);
+                RegisterPayload registerPayload = new RegisterPayload(
+                        etMail.getText().toString(),
+                        etPass.getText().toString(),
+                        etNome.getText().toString(),
+                        etCogn.getText().toString(),
+                        etData.getText().toString(),
+                        etCF.getText().toString(),
+                        etCit.getText().toString(),
+                        etCap.getText().toString(),
+                        etCall.getText().toString(),
+                        male.isChecked(),
+                        hearthDisease.isChecked(),
+                        allergy.isChecked(),
+                        immunodepression.isChecked(),
+                        anticoagulants.isChecked(),
+                        covid.isChecked()
+                );
 
-                            if (registerResponse.getRegister().equals("account_exists")) {
-                                Toast.makeText(getApplicationContext(), "Account exists", Toast.LENGTH_LONG).show();
-                            } else if (registerResponse.getRegister().equals("success")) {
-
-                                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                RegisterApi.call(getApplicationContext(), registerPayload, new ServerCallback() {
+                    @Override
+                    public void onSuccess(JSONObject registerResponse) {
+                        try {
+                            if (registerResponse.getString("code").equals("200")) {
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                 finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Errore durante la registrazione", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(getApplicationContext(), "Errore durante la registrazione 1" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                    }
 
-                                //Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_LONG).show();
-                            } else
-                                Toast.makeText(getApplicationContext(), "Incorrect Details", Toast.LENGTH_LONG).show();
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(getApplicationContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
-                        }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams() {
-                            Map<String, String> parameters = new HashMap<>();
-                            parameters.put("email", etMail.getText().toString());
-                            parameters.put("password", etPass.getText().toString());
-                            parameters.put("first_name", etNome.getText().toString());
-                            parameters.put("last_name", etCogn.getText().toString());
-                            parameters.put("date_of_birth", etData.getText().toString());
-                            if(male.isChecked()) parameters.put("gender","0");
-                            if(female.isChecked()) parameters.put("gender","1");
-                            
-                            parameters.put("fiscal_code", etCF.getText().toString());
-                            parameters.put("city", etCit.getText().toString());
-                            //parameters.put("", etAddr.getText().toString());
-                            parameters.put("cap", etCap.getText().toString());
-                            parameters.put("mobile_phone", etCall.getText().toString());
-                            if(c1.isChecked()) parameters.put("heart_disease","1");
-                                else parameters.put("heart_disease","0");
-                            if(c2.isChecked()) parameters.put("allergy","1");
-                                else parameters.put("allergy","0");
-                            if(c3.isChecked()) parameters.put("immunosuppression","1");
-                                else parameters.put("immunosuppression","0");
-                            if(c4.isChecked()) parameters.put("anticoagulants","1");
-                                else parameters.put("anticoagulants","0");
-                            if(c5.isChecked()) parameters.put("covid","1");
-                                else parameters.put("covid","0");
+                    @Override
+                    public void onFail(VolleyError volleyError) {
+                        StringBuilder toastError = VolleyErrorHandler.getToastMessage(volleyError);
+                        Toast.makeText(getApplicationContext(), toastError, Toast.LENGTH_LONG).show();
+                    }
+                });
 
-                            return parameters;
-                        }
-                    };
-                    RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
-                    rQueue.add(request);
-                }
             }
         });
 

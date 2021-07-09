@@ -1,17 +1,29 @@
-package response;
+package entity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 
 public class Reservation  implements Serializable {
 
-    String struttura;
-    String data;
-    String time;
-    String stock_vaccino;
-    String vaccino;
-    String stato;
-    String tel;
+    private String struttura;
+    private String data;
+    private String time;
+    private String stock_vaccino;
+    private String vaccino;
+    private String stato;
+    private String tel;
 
+    public Reservation(JSONObject reservationObject) throws JSONException {
+        struttura = reservationObject.getString("structure_name");
+        data = reservationObject.getString("date");
+        time = reservationObject.getString("time");
+        stock_vaccino = reservationObject.getString("stock_id");
+        vaccino = reservationObject.getString("name");
+        stato = reservationObject.getString("state");
+        tel = reservationObject.getString("phone_number");
+    }
 
     public Reservation(String struttura, String data, String time, String stock_vaccino, String vaccino, String stato, String tel) {
         this.struttura = struttura;

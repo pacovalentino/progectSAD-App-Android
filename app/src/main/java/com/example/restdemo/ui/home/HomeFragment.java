@@ -10,15 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.restdemo.R;
 
-import response.Patient;
-import response.Reservation;
+import entity.Reservation;
 
 public class HomeFragment extends Fragment {
 

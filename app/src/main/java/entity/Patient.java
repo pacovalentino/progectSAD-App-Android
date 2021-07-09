@@ -1,12 +1,13 @@
-package response;
+package entity;
 
-import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 
 public class Patient implements Serializable {
     private String email;
-    private String password;
+    private String password = "";
     private String last_name;
     private String first_name;
     private String date_of_birth;
@@ -21,6 +22,24 @@ public class Patient implements Serializable {
     private String anticoagulants;
     private String covid;
     private String id;
+
+    public Patient(JSONObject patientObject) throws JSONException {
+        email = patientObject.getString("email");
+        first_name = patientObject.getString("first_name");
+        last_name = patientObject.getString("last_name");
+        date_of_birth = patientObject.getString("date_of_birth");
+        gender = patientObject.getString("gender");
+        fiscal_code = patientObject.getString("fiscal_code");
+        city = patientObject.getString("city");
+        cap = patientObject.getString("cap");
+        mobile_phone = patientObject.getString("mobile_phone");
+        heart_disease = patientObject.getString("heart_disease");
+        allergy = patientObject.getString("allergy");
+        immunosuppression = patientObject.getString("immunosuppression");
+        anticoagulants = patientObject.getString("anticoagulants");
+        covid = patientObject.getString("covid");
+        id = patientObject.getString("id");
+    }
 
     public Patient(String email, String password, String first_name, String last_name,
                    String date_of_birth, String gender, String fiscal_code, String city,

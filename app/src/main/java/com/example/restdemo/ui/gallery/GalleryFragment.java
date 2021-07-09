@@ -1,8 +1,6 @@
 package com.example.restdemo.ui.gallery;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.restdemo.HomeActivity;
 import com.example.restdemo.R;
-import response.Patient;
+import entity.Patient;
 
 
 public class GalleryFragment extends Fragment {
