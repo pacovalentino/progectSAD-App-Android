@@ -1,4 +1,4 @@
-package com.example.restdemo.ui.home;
+package com.example.activity.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
-import com.example.restdemo.LoginActivity;
-import com.example.restdemo.R;
+import com.example.activity.LoginActivity;
+import com.example.activity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;

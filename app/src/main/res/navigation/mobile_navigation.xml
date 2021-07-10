@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.restdemo.ui.home.HomeFragment"
+        android:name="com.example.activity.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.restdemo.ui.gallery.GalleryFragment"
+        android:name="com.example.activity.ui.ProfileFragment"
         android:label="MyProfile"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_reservation"
-        android:name="com.example.restdemo.ui.slideshow.ReservationFragment"
+        android:name="com.example.activity.ui.ReservationFragment"
         android:label="Reservation"
         tools:layout="@layout/fragment_reservation" />
 

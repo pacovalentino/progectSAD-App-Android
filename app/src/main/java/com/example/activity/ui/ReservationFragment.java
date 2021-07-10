@@ -1,4 +1,4 @@
-package com.example.restdemo.ui.slideshow;
+package com.example.activity.ui;
 
 
 import android.annotation.SuppressLint;
@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +24,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
-import com.example.restdemo.HomeActivity;
-import com.example.restdemo.LoginActivity;
-import com.example.restdemo.R;
+import com.example.activity.HomeActivity;
+import com.example.activity.LoginActivity;
+import com.example.activity.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

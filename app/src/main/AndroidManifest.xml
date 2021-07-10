@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.restdemo">
+    package="com.example.activity">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,13 +13,13 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".HomeActivity"
+            android:name="com.example.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".Logo"
+            android:name="com.example.activity.Logo"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenThemeLogo">
             <intent-filter>
@@ -27,8 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.example.activity.RegisterActivity" />
+        <activity android:name="com.example.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

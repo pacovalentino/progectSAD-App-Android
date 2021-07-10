@@ -1,9 +1,6 @@
 package api;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,9 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.restdemo.LoginActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import api.interfaces.ServerCallback;
-import entity.Patient;
 
 public class GetStructuresByRegionApi {
     protected static final String URL = "http://10.0.2.2:8000/api/get-structures-by-region/";
