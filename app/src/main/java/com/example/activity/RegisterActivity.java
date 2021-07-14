@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             if (registerResponse.getString("code").equals("200")) {
                                 final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this, R.style.DialogTheme);
-                                progressDialog.setMessage("Loading...");
+                                progressDialog.setMessage("Loading...\nRegistation success");
                                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                                 progressDialog.show();
                                 progressDialog.setCancelable(false);
