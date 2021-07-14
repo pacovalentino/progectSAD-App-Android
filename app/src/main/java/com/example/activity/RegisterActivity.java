@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -117,8 +118,24 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onSuccess(JSONObject registerResponse) {
                         try {
                             if (registerResponse.getString("code").equals("200")) {
-                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                finish();
+                                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this, R.style.DialogTheme);
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.show();
+                                progressDialog.setCancelable(false);
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        try {
+                                            Thread.sleep(1500);
+                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                            finish();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        progressDialog.dismiss();
+                                    }
+                                }).start();
+                                
                             } else {
                                 Toast.makeText(getApplicationContext(), "Errore durante la registrazione", Toast.LENGTH_LONG).show();
                             }
