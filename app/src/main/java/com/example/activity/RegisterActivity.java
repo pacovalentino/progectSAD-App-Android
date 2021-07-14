@@ -118,23 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onSuccess(JSONObject registerResponse) {
                         try {
                             if (registerResponse.getString("code").equals("200")) {
-                                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this, R.style.DialogTheme);
-                                progressDialog.setMessage("Loading...\nRegistation success");
-                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                                progressDialog.show();
-                                progressDialog.setCancelable(false);
-                                new Thread(new Runnable() {
-                                    public void run() {
-                                        try {
-                                            Thread.sleep(1500);
-                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                            finish();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                        progressDialog.dismiss();
-                                    }
-                                }).start();
+                                Toast.makeText(getApplicationContext(), "Registation success", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                finish();
                                 
                             } else {
                                 Toast.makeText(getApplicationContext(), "Errore durante la registrazione", Toast.LENGTH_LONG).show();
