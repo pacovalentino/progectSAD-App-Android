@@ -265,9 +265,9 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     public void showRegion()
     {
         final String[] strut  = {
-                "Abruzzo", "Sicilia", "Piemonte", "Marche", "Valle d'Aosta", "Toscana", "Campania",
-                "Puglia", "Veneto", "Lombardia", "Emilia-Romagna", "Trentino-Alto Adige", "Sardegna", "Molise", "Calabria",
-                "Lazio", "Liguria", "Friuli-Venezia Giulia", "Basilicata", "Umbria"
+                "Abruzzo", "Basilicata","Campania", "Sardegna","Veneto","Piemonte", "Puglia"  /*, "Sicilia",  "Marche", "Valle d'Aosta", "Toscana",
+                  "Lombardia", "Emilia-Romagna", "Trentino-Alto Adige",  "Molise", "Calabria",
+                "Lazio", "Liguria", "Friuli-Venezia Giulia", "Umbria"*/
         };
         final Dialog d = new Dialog(getContext());
         d.setTitle("NumberPicker");
