@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -117,8 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onSuccess(JSONObject registerResponse) {
                         try {
                             if (registerResponse.getString("code").equals("200")) {
+                                Toast.makeText(getApplicationContext(), "Registation success", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                 finish();
+                                
                             } else {
                                 Toast.makeText(getApplicationContext(), "Errore durante la registrazione", Toast.LENGTH_LONG).show();
                             }

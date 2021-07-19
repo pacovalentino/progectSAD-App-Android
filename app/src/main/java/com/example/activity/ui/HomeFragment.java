@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
                 } catch (JSONException e) {
                     form_intent.putExtra("reserved", "no");
                     refreshButton.setVisibility(View.INVISIBLE);
-                    textView.setText("Make you Reservation");
+                    textView.setText("Make Your Reservation");
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
                     params.height=0;
                     params.width=0;
@@ -201,7 +201,7 @@ public class HomeFragment extends Fragment {
                         } catch (JSONException e) {
                             form_intent.putExtra("reserved", "no");
                             refreshButton.setVisibility(View.INVISIBLE);
-                            textView.setText("Make you Reservation");
+                            textView.setText("Make Your Reservation");
                             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
                             params.height=0;
                             params.width=0;

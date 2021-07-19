@@ -60,17 +60,11 @@
 
                     <TextView
                         android:id="@+id/myreservationID"
-                        android:layout_width="244dp"
+                        android:layout_width="306dp"
                         android:layout_height="match_parent"
                         android:text="My Reservation"
                         android:textColor="#673AB7"
-                        android:textSize="30dp" />
-
-
-                    <View
-                        android:id="@+id/dividgfger121212vc"
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent" />
+                        android:textSize="25dp" />
 
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -269,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:text="Info"
                     android:textColor="#673AB7"
-                    android:textSize="30dp" />
+                    android:textSize="25dp" />
 
                 <View
                     android:id="@+id/kjkjkj"
