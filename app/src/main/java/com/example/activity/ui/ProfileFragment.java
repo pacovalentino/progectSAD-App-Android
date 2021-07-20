@@ -38,8 +38,8 @@ public class ProfileFragment extends Fragment {
 
         t5=root.findViewById(R.id.t5);
         if(patient.getGender().equals("0")){
-            t5.setText("Male");
-        } else t5.setText("Female");
+            t5.setText("Maschio");
+        } else t5.setText("Femmina");
 
         t6=root.findViewById(R.id.t6);
         t6.setText(patient.getFiscal_code());
@@ -55,28 +55,28 @@ public class ProfileFragment extends Fragment {
 
         t10=root.findViewById(R.id.t10);
         if(patient.getHeart_disease().equals("false")){
-            t10.setText("Negative");
-        } else t10.setText("Positive");
+            t10.setText("Negativo");
+        } else t10.setText("Positivo");
 
         t11=root.findViewById(R.id.t11);
         if(patient.getAllergy().equals("false")){
-            t11.setText("Negative");
-        } else t11.setText("Positive");
+            t11.setText("Negativo");
+        } else t11.setText("Positivo");
 
         t12=root.findViewById(R.id.t12);
         if(patient.getImmunosuppression().equals("false")){
-            t12.setText("Negative");
-        } else t12.setText("Positive");
+            t12.setText("Negativo");
+        } else t12.setText("Positivo");
 
         t13=root.findViewById(R.id.t13);
         if(patient.getAnticoagulants().equals("false")){
-            t13.setText("Negative");
-        } else t13.setText("Positive");
+            t13.setText("Negativo");
+        } else t13.setText("Positivo");
 
         t14=root.findViewById(R.id.t14);
         if(patient.getCovid().equals("false")){
-            t14.setText("Negative");
-        } else t14.setText("Positive");
+            t14.setText("Negativo");
+        } else t14.setText("Positivo");
 
         return root;
     }

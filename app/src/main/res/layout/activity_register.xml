@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="FIRST NAME"
+                android:hint="NOME"
                 android:inputType="textPersonName"
                 android:textColor="#F6F6F6"
                 android:textColorHint="#9C9999" />
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="LAST NAME"
+                android:hint="COGNOME"
                 android:inputType="textPersonName"
                 android:textColor="#F6F6F6"
                 android:textColorHint="#9C9999" />
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="DATE: YY-MM-GG"
+                android:hint="DATA: YY-MM-GG"
                 android:inputType="date"
                 android:textColor="#F6F6F6"
                 android:textColorHint="#9C9999" />
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
-                    android:text="Male"
+                    android:text="MASCHIO"
                     android:textColor="#9C9999" />
 
                 <RadioButton
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Female"
+                    android:text="FEMMINA"
                     android:textColor="#9C9999" />
             </RadioGroup>
             <View
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="FISCAL CODE"
+                android:hint="CODICE FISCALE"
                 android:inputType="textPersonName"
                 android:textColor="#F6F6F6"
                 android:textColorHint="#9C9999" />
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="CITY"
+                android:hint="CITTA"
                 android:inputType="textPersonName"
                 android:textColor="#F6F6F6"
                 android:textColorHint="#9C9999" />
@@ -196,7 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="PHONE"
+                android:hint="TELEFONO"
                 android:inputType="phone"
                 android:textColor="#F6F6F6"
                 android:textColorHint="#9C9999"/>
@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="CARDIOPATHIC"
+                    android:text="CARDIOPATICO"
                     android:textColor="#9C9999"/>
 
                 <CheckBox
@@ -225,7 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="IMMUNODEPRESSION"
+                    android:text="IMMUNODEPRESSO"
                     android:textColor="#9C9999"/>
             </LinearLayout>
 
@@ -244,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ALLERGY"
+                    android:text="ALLERGIA"
                     android:textColor="#9C9999"/>
 
                 <CheckBox
@@ -252,7 +252,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ANTICOAGULANT"
+                    android:text="ANTICOAGULANTE"
                     android:textColor="#9C9999"/>
 
             </LinearLayout>
@@ -280,7 +280,7 @@
                 android:id="@+id/buttonregisterid"
                 android:layout_width="365dp"
                 android:layout_height="70dp"
-                android:text="REGISTER"
+                android:text="REGISTRATI"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 app:backgroundTint="@android:color/transparent" />
@@ -291,7 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="40dp"
-                android:text="Already have an account? Login"
+                android:text="Hai già un account? Effettua il Login"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="20dp" />
