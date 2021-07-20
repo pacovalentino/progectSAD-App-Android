@@ -191,7 +191,7 @@ public class HomeFragment extends Fragment {
                                 }
                             }
 
-                            form_intent.putExtra("reserved", "yes");
+                            form_intent.putExtra("reserved", newReservation.getStato().contains("cancelled") ? "no" : "yes");
                             refreshButton.setVisibility(View.VISIBLE);
                             form_intent.putExtra("reservation", newReservation);
                             tV1.setText(newReservation.getStruttura());
