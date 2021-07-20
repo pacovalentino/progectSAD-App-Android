@@ -99,7 +99,7 @@
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Region"
+                        android:hint="Regione"
                         android:textColor="#000000"
                         android:textColorHint="#9C9999" />
 
@@ -149,7 +149,7 @@
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Structure"
+                        android:hint="Struttura"
                         android:textColor="#000000"
                         android:textColorHint="#9C9999" />
 
