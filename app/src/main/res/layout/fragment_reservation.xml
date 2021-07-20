@@ -56,7 +56,7 @@
                     android:id="@+id/t9dsdssasasds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reservation"
+                    android:text="Prenotazione"
                     android:textColor="#673AB7"
                     android:textSize="30dp" />
 
@@ -71,7 +71,7 @@
                     android:id="@+id/tedfdfxtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Region"
+                    android:text="Regione"
                     android:textSize="15dp" />
 
 
@@ -99,7 +99,7 @@
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Region"
+                        android:hint="Regione"
                         android:textColor="#000000"
                         android:textColorHint="#9C9999" />
 
@@ -121,7 +121,7 @@
                     android:id="@+id/textV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Structure"
+                    android:text="Struttura"
                     android:textSize="15dp" />
 
 
@@ -149,7 +149,7 @@
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Structure"
+                        android:hint="Struttura"
                         android:textColor="#000000"
                         android:textColorHint="#9C9999" />
 
@@ -178,7 +178,7 @@
                     android:id="@+id/textVqaqa"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Calendar"
+                    android:text="Calendario"
                     android:textSize="15dp" />
 
                 <View
@@ -232,7 +232,7 @@
                     android:layout_width="359dp"
                     android:layout_height="55dp"
                     android:background="#A1A1A1"
-                    android:text="Reserve" />
+                    android:text="Prenota" />
 
                 <TextView
                     android:id="@+id/textViewIdStruttura"
