@@ -20,7 +20,7 @@ import entity.Patient;
 import api.interfaces.ServerCallback;
 
 public class MakeReservationApi {
-    protected static final String URL = "http://10.0.2.2:8000/api/reservation";
+    protected static final String URL = "http://51.183.34.19:57017/api/reservation";
     protected static final int METHOD = Request.Method.POST;
 
     public static void call(

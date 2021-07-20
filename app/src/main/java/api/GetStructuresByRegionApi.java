@@ -19,7 +19,7 @@ import java.util.Map;
 import api.interfaces.ServerCallback;
 
 public class GetStructuresByRegionApi {
-    protected static final String URL = "http://10.0.2.2:8000/api/get-structures-by-region/";
+    protected static final String URL = "http://51.183.34.19:57017/api/get-structures-by-region/";
     protected static final int METHOD = Request.Method.GET;
 
     public static void call(

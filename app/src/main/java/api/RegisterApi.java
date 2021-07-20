@@ -19,7 +19,7 @@ import api.payload.RegisterPayload;
 import api.interfaces.ServerCallback;
 
 public class RegisterApi {
-    protected final static String URL = "http://10.0.2.2:8000/api/register";
+    protected final static String URL = "http://51.183.34.19:57017/api/register";
     protected final static int METHOD = Request.Method.POST;
 
     public static void call(final Context context, final RegisterPayload payload, final ServerCallback callback) {
