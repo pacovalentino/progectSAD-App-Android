@@ -14,13 +14,13 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.activity.ui.ProfileFragment"
-        android:label="MyProfile"
+        android:label="Profilo"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_reservation"
         android:name="com.example.activity.ui.ReservationFragment"
-        android:label="Reservation"
+        android:label="Prenotazione"
         tools:layout="@layout/fragment_reservation" />
 
 </navigation>
