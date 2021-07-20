@@ -67,19 +67,23 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         btReserve=root.findViewById(R.id.buttonReserve);
 
         String reserved = getActivity().getIntent().getStringExtra("reserved");
-        if(reserved.equals("yes")) {
-            editText.setFocusable(false);
-            editText.setEnabled(false);
-            editRegion.setFocusable(false);
-            editRegion.setEnabled(false);
-            editStructure.setFocusable(false);
-            editStructure.setEnabled(false);
-            button.setEnabled(false);
-            buttonStr.setEnabled(false);
-            btRegion.setEnabled(false);
-            btReserve.setEnabled(false);
-            btReserve.setEnabled(false);
-        } else if(reserved.equals("no")){
+        if (reserved != null) {
+            if (reserved.equals("yes")) {
+                editText.setFocusable(false);
+                editText.setEnabled(false);
+                editRegion.setFocusable(false);
+                editRegion.setEnabled(false);
+                editStructure.setFocusable(false);
+                editStructure.setEnabled(false);
+                button.setEnabled(false);
+                buttonStr.setEnabled(false);
+                btRegion.setEnabled(false);
+                btReserve.setEnabled(false);
+                btReserve.setEnabled(false);
+            } else {
+                btReserve.setEnabled(true);
+            }
+        } else {
             btReserve.setEnabled(true);
         }
 
