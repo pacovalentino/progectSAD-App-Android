@@ -232,7 +232,7 @@
                     android:layout_width="359dp"
                     android:layout_height="55dp"
                     android:background="#A1A1A1"
-                    android:text="Reserve" />
+                    android:text="Prenota" />
 
                 <TextView
                     android:id="@+id/textViewIdStruttura"
