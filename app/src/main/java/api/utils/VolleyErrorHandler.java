@@ -33,6 +33,7 @@ public class VolleyErrorHandler {
     public static StringBuilder getToastMessage(VolleyError volleyError) {
         try {
             String errorBody = new String(volleyError.networkResponse.data, StandardCharsets.UTF_8);
+            errorBody = errorBody + "}";
             JSONObject errorPayload = new JSONObject(errorBody);
             String exceptionMessage = errorPayload.getString("message");
             if (exceptionMessage.equals("validation")) {
