@@ -151,9 +151,9 @@ public class LoginActivity extends AppCompatActivity {
 
         alertDialogBuilder = new AlertDialog.Builder(this,R.style.DialogThemeExit);
         // Setting Alert Dialog Title
-        alertDialogBuilder.setTitle("Confirm Exit..!!!").setMessage("Are you sure,You want to exit?");
+        alertDialogBuilder.setTitle("Conferma l'uscita!!!").setMessage("Sei sicuro?");
 
-        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 finish();
@@ -163,13 +163,13 @@ public class LoginActivity extends AppCompatActivity {
         alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(LoginActivity.this,"You clicked over No",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Hai cliccato NO",Toast.LENGTH_SHORT).show();
             }
         });
-        alertDialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNeutralButton("Cancella", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"You clicked on Cancel",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Hai cliccato Cancella",Toast.LENGTH_SHORT).show();
             }
         });
 
