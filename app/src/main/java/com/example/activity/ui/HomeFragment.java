@@ -3,6 +3,7 @@ package com.example.activity.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class HomeFragment extends Fragment {
             public void onSuccess(JSONObject result) {
                 try {
                     final Reservation reservation = new Reservation(result.getJSONObject("reservation"));
-                    form_intent.putExtra("reserved", reservation.getStato().equals("cancelled") ? "no" : "yes");
+                    form_intent.putExtra("reserved", reservation.getStato().contains("cancelled") ? "no" : "yes");
                     refreshButton.setVisibility(View.VISIBLE);
                     form_intent.putExtra("reservation", reservation);
                     tV1.setText(reservation.getStruttura());
