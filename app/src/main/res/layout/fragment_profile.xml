@@ -53,7 +53,7 @@
                     android:id="@+id/t9dsdssasasds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Profile"
+                    android:text="Profilo"
                     android:textColor="#673AB7"
                     android:textSize="30dp" />
 
@@ -66,7 +66,7 @@
                     android:id="@+id/textV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="First Name"
+                    android:text="Nome"
                     android:textSize="15dp" />
 
                 <View
@@ -97,7 +97,7 @@
                     android:id="@+id/texdsdtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Last Name"
+                    android:text="Cognome"
                     android:textSize="15dp" />
 
                 <View
@@ -190,7 +190,7 @@
                     android:id="@+id/texdsdvvvtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Gender"
+                    android:text="Sesso"
                     android:textSize="15dp" />
 
                 <View
@@ -221,7 +221,7 @@
                     android:id="@+id/texdsdvvccvtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Fiscal Code"
+                    android:text="Codice Fiscale"
                     android:textSize="15dp" />
 
                 <View
@@ -252,7 +252,7 @@
                     android:id="@+id/texdsaadvvvtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="City"
+                    android:text="Città"
                     android:textSize="15dp" />
 
                 <View
@@ -313,7 +313,7 @@
                     android:id="@+id/texdsdvvvaatV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Phone"
+                    android:text="Telefono"
                     android:textSize="15dp" />
 
                 <View
@@ -344,7 +344,7 @@
                     android:id="@+id/t9dsdsds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sanitaty Form"
+                    android:text="Form Sanitario"
                     android:textColor="#673AB7"
                     android:textSize="30dp" />
 
@@ -357,7 +357,7 @@
                     android:id="@+id/texdsdvv11vtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Heart Disease"
+                    android:text="Cardiopatia"
                     android:textSize="15dp" />
 
                 <View
@@ -388,7 +388,7 @@
                     android:id="@+id/texdsd111vvvtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Allergy"
+                    android:text="Allergia"
                     android:textSize="15dp" />
 
                 <View
@@ -421,7 +421,7 @@
                     android:id="@+id/texdsdvv111vtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Immunosuppression"
+                    android:text="Immunodepresso"
                     android:textSize="15dp" />
 
                 <View
@@ -452,7 +452,7 @@
                     android:id="@+id/texdsdvvvtV111"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Anticoagulants"
+                    android:text="AntiCoagulanti"
                     android:textSize="15dp" />
 
                 <View
