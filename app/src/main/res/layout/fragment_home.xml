@@ -62,7 +62,7 @@
                         android:id="@+id/myreservationID"
                         android:layout_width="306dp"
                         android:layout_height="match_parent"
-                        android:text="My Reservation"
+                        android:text="Prenotazione"
                         android:textColor="#673AB7"
                         android:textSize="25dp" />
 
@@ -93,7 +93,7 @@
                         android:id="@+id/textV"
                         android:layout_width="354dp"
                         android:layout_height="wrap_content"
-                        android:text="Structure"
+                        android:text="Struttura"
                         android:textSize="15dp" />
 
                     <View
@@ -124,7 +124,7 @@
                         android:id="@+id/texdsdtV"
                         android:layout_width="354dp"
                         android:layout_height="wrap_content"
-                        android:text="Date"
+                        android:text="Data"
                         android:textSize="15dp" />
 
                     <View
@@ -155,7 +155,7 @@
                         android:id="@+id/tasaexdsdtV"
                         android:layout_width="354dp"
                         android:layout_height="wrap_content"
-                        android:text="Time"
+                        android:text="Ora"
                         android:textSize="15dp" />
 
                     <View
@@ -186,7 +186,7 @@
                         android:id="@+id/tevvvxdsdtV"
                         android:layout_width="354dp"
                         android:layout_height="wrap_content"
-                        android:text="Lotto - Vaccine"
+                        android:text="Lotto - Vaccino"
                         android:textSize="15dp" />
 
                     <View
@@ -217,7 +217,7 @@
                         android:id="@+id/texdsdvvvtV"
                         android:layout_width="354dp"
                         android:layout_height="wrap_content"
-                        android:text="State"
+                        android:text="Stato"
                         android:textSize="15dp" />
 
                     <View
