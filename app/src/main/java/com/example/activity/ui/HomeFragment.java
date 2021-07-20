@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
             public void onSuccess(JSONObject result) {
                 try {
                     final Reservation reservation = new Reservation(result.getJSONObject("reservation"));
-                    form_intent.putExtra("reserved", "yes");
+                    form_intent.putExtra("reserved", reservation.getStato().equals("cancelled") ? "no" : "yes");
                     refreshButton.setVisibility(View.VISIBLE);
                     form_intent.putExtra("reservation", reservation);
                     tV1.setText(reservation.getStruttura());
