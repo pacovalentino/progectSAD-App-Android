@@ -46,6 +46,27 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
     static EditText editText,editRegion,editStructure;
     ProgressDialog progressDialog;
 
+    private void disableButtons() {
+        this.buttonSet(false);
+    }
+
+    private void enableButtons() {
+        this.buttonSet(true);
+    }
+
+    private void buttonSet(boolean value) {
+        editText.setFocusable(value);
+        editText.setEnabled(value);
+        editRegion.setFocusable(value);
+        editRegion.setEnabled(value);
+        editStructure.setFocusable(value);
+        editStructure.setEnabled(value);
+        button.setEnabled(value);
+        buttonStr.setEnabled(value);
+        btRegion.setEnabled(value);
+        btReserve.setEnabled(value);
+        btReserve.setEnabled(value);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,22 +90,12 @@ public class ReservationFragment extends Fragment implements NumberPicker.OnValu
         String reserved = getActivity().getIntent().getStringExtra("reserved");
         if (reserved != null) {
             if (reserved.equals("yes")) {
-                editText.setFocusable(false);
-                editText.setEnabled(false);
-                editRegion.setFocusable(false);
-                editRegion.setEnabled(false);
-                editStructure.setFocusable(false);
-                editStructure.setEnabled(false);
-                button.setEnabled(false);
-                buttonStr.setEnabled(false);
-                btRegion.setEnabled(false);
-                btReserve.setEnabled(false);
-                btReserve.setEnabled(false);
+                this.disableButtons();
             } else {
-                btReserve.setEnabled(true);
+                this.enableButtons();
             }
         } else {
-            btReserve.setEnabled(true);
+            this.enableButtons();
         }
 
         btReserve.setOnClickListener(new View.OnClickListener() {
