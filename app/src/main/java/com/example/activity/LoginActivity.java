@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                             form_intent.putExtra("token", token);
 
                             progressDialog = new ProgressDialog(LoginActivity.this, R.style.DialogTheme);
-                            progressDialog.setMessage("Loading...");
+                            progressDialog.setMessage("Caricamento...");
                             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.show();
                             progressDialog.setCancelable(false);
