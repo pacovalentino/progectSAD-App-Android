@@ -3,6 +3,7 @@ package api;
 import android.content.Context;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,7 +40,7 @@ public class GetLastReservationByPatientEmailApi {
             @Override
             public void onResponse(String s) {
                 try {
-                    serverCallback.onSuccess(new JSONObject(s));
+                    serverCallback.onSuccess(new JSONObject(s + "}"));
                 } catch (JSONException e) {
                     serverCallback.onSuccess(new JSONObject());
                 }
@@ -55,6 +56,12 @@ public class GetLastReservationByPatientEmailApi {
                 return params;
             }
         };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                2000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         RequestQueue rQueue = Volley.newRequestQueue(context);
         rQueue.add(request);
     }

@@ -39,7 +39,7 @@ public class GetStructuresByRegionApi {
             @Override
             public void onResponse(String s) {
                 try {
-                    serverCallback.onSuccess(new JSONObject(s));
+                    serverCallback.onSuccess(new JSONObject(s + "}"));
                 } catch (JSONException e) {
                     serverCallback.onSuccess(new JSONObject());
                 }

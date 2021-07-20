@@ -67,7 +67,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
+                    Log.e("result", result.toString());
+
+                    if (result.isNull("reservation")) {
+                        return;
+                    }
+
                     final Reservation reservation = new Reservation(result.getJSONObject("reservation"));
+
                     form_intent.putExtra("reserved", reservation.getStato().contains("cancelled") ? "no" : "yes");
                     refreshButton.setVisibility(View.VISIBLE);
                     form_intent.putExtra("reservation", reservation);
@@ -106,6 +113,7 @@ public class HomeFragment extends Fragment {
                         }
                     });
                 } catch (JSONException e) {
+                    e.printStackTrace();
                     form_intent.putExtra("reserved", "no");
                     refreshButton.setVisibility(View.INVISIBLE);
                     textView.setText("Prenotati Ora");
@@ -180,6 +188,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onSuccess(JSONObject result) {
                         try {
+                            Log.e("result", result.toString());
                             final Reservation newReservation = new Reservation(result.getJSONObject("reservation"));
 
                             Reservation oldReservation = (Reservation) getActivity().getIntent().getSerializableExtra("reservation");
@@ -189,6 +198,8 @@ public class HomeFragment extends Fragment {
                                 } else {
                                     Toast.makeText(getContext(), "Nessun aggiornamento", Toast.LENGTH_LONG).show();
                                 }
+                            } else {
+                                Toast.makeText(getContext(), "Prenotazione trovata", Toast.LENGTH_LONG).show();
                             }
 
                             form_intent.putExtra("reserved", newReservation.getStato().contains("cancelled") ? "no" : "yes");
@@ -200,6 +211,7 @@ public class HomeFragment extends Fragment {
                             tV4.setText(newReservation.getStock_vaccino() + " - " + newReservation.getVaccino());
                             tV5.setText(Reservation.stateToLabel(newReservation.getStato()));
                         } catch (JSONException e) {
+                            e.printStackTrace();
                             form_intent.putExtra("reserved", "no");
                             refreshButton.setVisibility(View.INVISIBLE);
                             textView.setText("Prenotati Ora");

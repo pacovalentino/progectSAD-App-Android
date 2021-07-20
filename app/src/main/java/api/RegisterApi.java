@@ -34,7 +34,7 @@ public class RegisterApi {
             @Override
             public void onResponse(String s) {
                 try {
-                    callback.onSuccess(new JSONObject(s));
+                    callback.onSuccess(new JSONObject(s + "}"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                     callback.onSuccess(new JSONObject());
