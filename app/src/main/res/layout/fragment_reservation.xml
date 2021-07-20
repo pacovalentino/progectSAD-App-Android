@@ -56,7 +56,7 @@
                     android:id="@+id/t9dsdssasasds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reservation"
+                    android:text="Prenotazione"
                     android:textColor="#673AB7"
                     android:textSize="30dp" />
 
@@ -71,7 +71,7 @@
                     android:id="@+id/tedfdfxtV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Region"
+                    android:text="Regione"
                     android:textSize="15dp" />
 
 
@@ -121,7 +121,7 @@
                     android:id="@+id/textV"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Structure"
+                    android:text="Struttura"
                     android:textSize="15dp" />
 
 
@@ -178,7 +178,7 @@
                     android:id="@+id/textVqaqa"
                     android:layout_width="354dp"
                     android:layout_height="wrap_content"
-                    android:text="Calendar"
+                    android:text="Calendario"
                     android:textSize="15dp" />
 
                 <View
