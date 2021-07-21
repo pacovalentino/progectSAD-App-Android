@@ -36,6 +36,64 @@ public class HomeFragment extends Fragment {
     Button b1,b2,b3,b4,b5,b6,b7;
     FloatingActionButton refreshButton;
 
+    protected void updateLayoutNoReservation()
+    {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+        params.height=0;
+        params.width=0;
+        linearLayout.setLayoutParams(params);
+        textView.setText("Prenotati Ora");
+        linearLayout.setVisibility(View.INVISIBLE);
+        linearLayoutinfo.setLayoutParams(params);
+        linearLayoutinfo.setVisibility(View.INVISIBLE);
+    }
+
+    protected void updateLayoutWithReservation(final Reservation newReservation)
+    {
+        textView.setText("Prenotazione");
+        refreshButton.setVisibility(View.VISIBLE);
+        tV1.setText(newReservation.getStruttura());
+        tV2.setText(newReservation.getData());
+        tV3.setText(newReservation.getTime());
+        tV4.setText(newReservation.getStock_vaccino() + " - " + newReservation.getVaccino());
+        tV5.setText(Reservation.stateToLabel(newReservation.getStato()));
+        linearLayoutinfo.setVisibility(View.VISIBLE);
+        linearLayout.setVisibility(View.VISIBLE);
+        tV1.setText(newReservation.getStruttura());
+        tV2.setText(newReservation.getData());
+        tV3.setText(newReservation.getTime());
+        tV4.setText(newReservation.getStock_vaccino() + " - " + newReservation.getVaccino());
+        tV5.setText(Reservation.stateToLabel(newReservation.getStato()));
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tel="tel:"+newReservation.getTel();
+                if(tel.length()<5){
+                    tel="tel:0";
+                }
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(tel));
+                startActivity(intent);
+            }
+        });
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String web="https://www.google.it/search?q=";
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web+newReservation.getStruttura()));
+                startActivity(browserIntent);
+            }
+        });
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String web="https://www.google.it/maps/search/";
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web+newReservation.getStruttura()));
+                startActivity(browserIntent);
+            }
+        });
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -70,60 +128,20 @@ public class HomeFragment extends Fragment {
                     Log.e("result", result.toString());
 
                     if (result.isNull("reservation")) {
-                        return;
+                        form_intent.putExtra("reserved", "no");
+                        updateLayoutNoReservation();
+                    } else {
+                        final Reservation reservation = new Reservation(result.getJSONObject("reservation"));
+
+                        form_intent.putExtra("reserved", reservation.getStato().contains("cancelled") ? "no" : "yes");
+                        form_intent.putExtra("reservation", reservation);
+
+                        updateLayoutWithReservation(reservation);
                     }
-
-                    final Reservation reservation = new Reservation(result.getJSONObject("reservation"));
-
-                    form_intent.putExtra("reserved", reservation.getStato().contains("cancelled") ? "no" : "yes");
-                    refreshButton.setVisibility(View.VISIBLE);
-                    form_intent.putExtra("reservation", reservation);
-                    tV1.setText(reservation.getStruttura());
-                    tV2.setText(reservation.getData());
-                    tV3.setText(reservation.getTime());
-                    tV4.setText(reservation.getStock_vaccino() + " - " + reservation.getVaccino());
-                    tV5.setText(Reservation.stateToLabel(reservation.getStato()));
-
-                    b2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String tel="tel:"+reservation.getTel();
-                            if(tel.length()<5){
-                                tel="tel:0";
-                            }
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            intent.setData(Uri.parse(tel));
-                            startActivity(intent);
-                        }
-                    });
-                    b3.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String web="https://www.google.it/search?q=";
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web+reservation.getStruttura()));
-                            startActivity(browserIntent);
-                        }
-                    });
-                    b5.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String web="https://www.google.it/maps/search/";
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web+reservation.getStruttura()));
-                            startActivity(browserIntent);
-                        }
-                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                     form_intent.putExtra("reserved", "no");
-                    refreshButton.setVisibility(View.INVISIBLE);
-                    textView.setText("Prenotati Ora");
-                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-                    params.height=0;
-                    params.width=0;
-                    linearLayout.setLayoutParams(params);
-                    linearLayout.setVisibility(View.INVISIBLE);
-                    linearLayoutinfo.setLayoutParams(params);
-                    linearLayoutinfo.setVisibility(View.INVISIBLE);
+                    updateLayoutNoReservation();
                 }
             }
 
@@ -203,25 +221,12 @@ public class HomeFragment extends Fragment {
                             }
 
                             form_intent.putExtra("reserved", newReservation.getStato().contains("cancelled") ? "no" : "yes");
-                            refreshButton.setVisibility(View.VISIBLE);
                             form_intent.putExtra("reservation", newReservation);
-                            tV1.setText(newReservation.getStruttura());
-                            tV2.setText(newReservation.getData());
-                            tV3.setText(newReservation.getTime());
-                            tV4.setText(newReservation.getStock_vaccino() + " - " + newReservation.getVaccino());
-                            tV5.setText(Reservation.stateToLabel(newReservation.getStato()));
+                            updateLayoutWithReservation(newReservation);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             form_intent.putExtra("reserved", "no");
-                            refreshButton.setVisibility(View.INVISIBLE);
-                            textView.setText("Prenotati Ora");
-                            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-                            params.height=0;
-                            params.width=0;
-                            linearLayout.setLayoutParams(params);
-                            linearLayout.setVisibility(View.INVISIBLE);
-                            linearLayoutinfo.setLayoutParams(params);
-                            linearLayoutinfo.setVisibility(View.INVISIBLE);
+                            updateLayoutNoReservation();
                         }
                     }
 
