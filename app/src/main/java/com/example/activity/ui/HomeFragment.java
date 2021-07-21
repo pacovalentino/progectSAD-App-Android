@@ -46,6 +46,9 @@ public class HomeFragment extends Fragment {
         linearLayout.setVisibility(View.INVISIBLE);
         linearLayoutinfo.setLayoutParams(params);
         linearLayoutinfo.setVisibility(View.INVISIBLE);
+        b2.setOnClickListener(null);
+        b3.setOnClickListener(null);
+        b5.setOnClickListener(null);
     }
 
     protected void updateLayoutWithReservation(final Reservation newReservation)
